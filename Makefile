@@ -6,7 +6,7 @@
 #    By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/30 19:47:37 by lgiacalo          #+#    #+#              #
-#    Updated: 2016/11/30 20:50:19 by lgiacalo         ###   ########.fr        #
+#*   Updated: 2016/12/05 18:57:31 by lgiacalo         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC = srcs/main.c\
 
 OBJ = main.o\
 
-LIB = libft/libft.a minilibx_macos/libmlx.a -lmlx
+LIB = libft/libft.a minilibx_macos/libmlx.a -lmlx -L minilibx_macos/
 
 FRAME = -framework OpenGL -framework AppKit
 

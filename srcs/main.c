@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/11/30 23:39:29 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/05 18:48:01 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int	main(int ac, char **argv)
 	t_env	first;
 	int x, y;
 
-	first.mlx = mlx_init(0);
+	if ((first.mlx = mlx_init(0)) == NULL)
+		return (EXIT_FAILURE);
 	first.win = mlx_new_window(first.mlx, 600, 600, "First windows");
 
 	printf("valeur mlx = %p\n", first.mlx);
