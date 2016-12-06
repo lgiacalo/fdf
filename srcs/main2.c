@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/06 17:08:54 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/06 01:55:07 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,6 @@ int	main(int ac, char **argv)
 
 	if ((first.mlx = mlx_init(0)) == NULL)
 		return (EXIT_FAILURE);
-	if ((first.ima = mlx_new_image(first.mlx, 400, 400)) == NULL)
-		return (EXIT_FAILURE);
-	if ((first.chaine = mlx_get_data_addr(first.ima, 4, 10, 1)) == NULL)
-		return (EXIT_FAILURE);
-
 	first.win = mlx_new_window(first.mlx, 600, 600, "First windows");
 
 	printf("valeur mlx = %p\n", first.mlx);
