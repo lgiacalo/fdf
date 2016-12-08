@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:42:12 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/08 22:06:53 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/09 00:22:48 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 
 typedef struct	s_point
 {
-	int	x;
-	int	y;
+	int			x;
+	int			y;
 }				t_point;
 
 typedef struct	s_map
@@ -52,7 +52,6 @@ typedef struct	s_env
 	int			len_chaine; // = 4 * nbrLigne * nbrColonne
 }				t_env;
 
-void	ft_print_words_tables(char **tab);
-
+void			ft_print_words_tables(char **tab);
 
 #endif

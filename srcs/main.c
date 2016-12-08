@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/08 23:05:35 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/09 00:18:40 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ int	expose_hook(t_env *env)
 	return (0);
 }
 
-int	ft_display_file(t_list **list, t_map *map)
+int	ft_display_file(t_file **list, t_map *map)
 {
-	t_list	*temp1;
-	t_list	*temp2;
+	t_file	*temp1;
+	t_file	*temp2;
 	int		i;
 
 	*list = temp1;
@@ -67,9 +67,9 @@ int	ft_display_file(t_list **list, t_map *map)
 	{
 		printf("valeur pointeur next : %p\n", temp1->next);
 		printf("valeur pointeur next : %p\n", (temp1->next)->next);
-	//	map->point[i] = (char*)(temp1->content);
-	//	i++;
-	//	temp2 = temp1;
+		map->point[i] = (temp1->str);
+		i++;
+		temp2 = temp1;
 		temp1 = temp1->next;
 	//	free(temp2);
 	}
@@ -89,8 +89,8 @@ int	ft_display_file(t_list **list, t_map *map)
 int	ft_read_file(char *tab, t_env *env, t_map *map)
 {
 	int		fd;
-	t_list	*debut;
-	t_list	*list;
+	t_file	*debut;
+	t_file	*list;
 	char	*temp;
 
 	if ((fd = open(tab, O_RDONLY)) == -1)
@@ -99,15 +99,16 @@ int	ft_read_file(char *tab, t_env *env, t_map *map)
 	while (get_next_line(fd, &temp) == 1)
 	{
 		printf("buff : %s\t longeur chaine : %zu\n", temp, ft_strlen(temp));
-		list = ft_lstnew((void const*)temp, ft_strlen(temp));
-		printf("valeur : %s\n", (char*)(list->content));
-		ft_lstadd_end(&debut, list);
-		free(temp);
+		list = (t_file*)malloc(sizeof(t_file) * 1);
+		list->str = temp;
+		printf("valeur : %s\n", (list->str));
+		ft_lstadd_end((t_list**)(&debut), (t_list*)list);
+		printf("first ligne : %s\n", (debut->str));
 	}
 	list = debut;
-	map->line = (int)ft_lstsize(list);
+	map->line = (int)ft_lstsize((t_list*)list);
 	printf("longeur list = nbr de ligne : %d\n", map->line);
-	printf("valeur premiere ligne : %s\n", (char*)(debut->content));
+	printf("valeur premiere ligne : %s\n", (debut->str));
 	write(1, "222\n", 4);
 	if (close(fd) == -1)
 		return (-1);

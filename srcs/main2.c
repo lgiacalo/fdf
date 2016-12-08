@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/08 23:05:35 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/08 23:59:42 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,37 +50,6 @@ int	expose_hook(t_env *env)
 
 int	ft_display_file(t_list **list, t_map *map)
 {
-	t_list	*temp1;
-	t_list	*temp2;
-	int		i;
-
-	*list = temp1;
-	
-	printf("longeur list = nbr de ligne : %d\n", map->line);
-	if ((map->point = (char**)malloc(sizeof(char*) * (map->line + 1))) == NULL)
-		return (-1);
-	write(1, "555\n", 4);
-	map->point[map->line] = 0;
-	write(1, "555\n", 4);
-	i = 0;
-	while (temp1)
-	{
-		printf("valeur pointeur next : %p\n", temp1->next);
-		printf("valeur pointeur next : %p\n", (temp1->next)->next);
-	//	map->point[i] = (char*)(temp1->content);
-	//	i++;
-	//	temp2 = temp1;
-		temp1 = temp1->next;
-	//	free(temp2);
-	}
-	printf("valeur de i : %d\n", i);
-	return (0);
-	write(1, "666\n", 4);
-	map->col = ft_strlen(map->point[0]);
-	write(1, "777\n", 4);
-	ft_print_words_tables(map->point);
-	write(1, "888\n", 4);
-
 	return (0);
 }
 
@@ -89,32 +58,42 @@ int	ft_display_file(t_list **list, t_map *map)
 int	ft_read_file(char *tab, t_env *env, t_map *map)
 {
 	int		fd;
-	t_list	*debut;
-	t_list	*list;
+	int		i;
 	char	*temp;
 
+	write(1, "merde\n", 6);
 	if ((fd = open(tab, O_RDONLY)) == -1)
 			return (-1);
-	write(1, "111\n", 4);
+	i = 0;
+	write(1, "merde\n", 6);
 	while (get_next_line(fd, &temp) == 1)
 	{
-		printf("buff : %s\t longeur chaine : %zu\n", temp, ft_strlen(temp));
-		list = ft_lstnew((void const*)temp, ft_strlen(temp));
-		printf("valeur : %s\n", (char*)(list->content));
-		ft_lstadd_end(&debut, list);
 		free(temp);
+		i++;
 	}
-	list = debut;
-	map->line = (int)ft_lstsize(list);
-	printf("longeur list = nbr de ligne : %d\n", map->line);
-	printf("valeur premiere ligne : %s\n", (char*)(debut->content));
-	write(1, "222\n", 4);
-	if (close(fd) == -1)
+	write(1, "merde\n", 6);
+	map->line = i;
+	write(1, "merde\n", 6);
+	if ((close(fd) == -1) && ((fd = open(tab, O_RDONLY)) == -1))
 		return (-1);
-	write(1, "333\n", 4);
-	if (ft_display_file(&debut, map) == -1)
+	write(1, "merde\n", 6);
+	if ((map->point = (char**)malloc(sizeof(char*) * (i + 1))) == NULL)
 		return (-1);
-	write(1, "999\n", 4);
+	write(1, "merde\n", 6);
+	map->point[i] = 0;
+	i = 0;
+	write(1, "merde\n", 6);
+	printf("valeur fd : %d\n", fd);
+	while (get_next_line(fd, &temp) == 1)
+	{
+		map->point[i] = temp;
+		printf("LIGNE : %d\n", i);
+		printf("dans le buf : %s\n", temp);
+		printf("dans le map : %s\n", map->point[i]);
+		i++;
+	}
+	write(1, "merde\n", 6);
+	//printf("troisieme ligne : %s\n", map->point[2]);
 	return (0);
 }
 

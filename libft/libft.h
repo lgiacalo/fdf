@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 03:07:43 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/08 22:02:43 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/09 00:20:55 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct		s_file
 	int				fd;
 	struct s_file	*next;
 }					t_file;
-
 
 int					get_next_line(const int fd, char **line);
 void				ft_print_words_tables(char **tab);
