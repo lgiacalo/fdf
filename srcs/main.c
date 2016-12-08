@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/07 03:11:21 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/08 02:17:55 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	expose_hook(t_env *env)
 
 int	ft_read_file(char *tab, t_env *env, t_map map)
 {
+
 	return (0);
 }
 
@@ -106,6 +107,53 @@ int	main(int argc, char **argv)
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 100, 100);
 
 	printf("valeur chaine = %p\n", a->chaine);
+
+	t_point ptA;
+	t_point ptB;
+	t_point ptC;
+
+	double	m, p;
+
+	ptA.x = 2;
+	ptA.y = 1;
+	ptB.x = 65;
+	ptB.y = 185;
+
+
+	mlx_pixel_put(a->mlx, a->win, ptA.x, ptA.y, 0x000000);
+	mlx_pixel_put(a->mlx, a->win, ptB.x, ptB.y, 0x000000);
+
+	if (ABS(ptA.x - ptB.x) < ABS(ptA.y - ptB.y))
+	{
+		ft_swap(&(ptA.x), &(ptB.x));
+		ft_swap(&(ptA.y), &(ptB.y));
+		printf("je suis passee par le swap !!\nDonc un pixel par ligne\n");
+	}
+	else
+		printf("pas de swap !!\nDonc un pixel par colonne\n");
+
+	printf("valeur point A : (%d,%d)\n", ptA.x, ptA.y);
+	printf("valeur point B : (%d,%d)\n", ptB.x, ptB.y);
+
+		
+	ptC.x = ptB.x;
+	ptC.y = 0;
+	
+	printf("valeur point C : (%d,%d)\n", ptC.x, ptC.y);
+	
+	m = (double)((ptB.y - ptA.y) / (ptB.x - ptA.x));
+	p = ptA.y - (m * ptA.x);
+
+	while (ptC.x <= ptA.x)
+	{
+		printf("valeur point C dans le while : (%d,%d)\n", ptC.x, ptC.y);
+		ptC.y = (int)(m * ptC.x + p);
+		mlx_pixel_put(a->mlx, a->win, ptC.x, (ptC.y + 1), 0x000000);
+		mlx_pixel_put(a->mlx, a->win, (ptC.x + 1), ptC.y, 0x000000);
+		mlx_pixel_put(a->mlx, a->win, ptC.x, ptC.y, 0x000000);
+		mlx_pixel_put(a->mlx, a->win, (ptC.x + 1), (ptC.y + 1), 0x000000);
+		ptC.x++;
+	}
 
 
 

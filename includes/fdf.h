@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:42:12 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/07 03:11:24 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/08 02:17:58 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@
 # include "../minilibx_macos/mlx.h"
 # include "../libft/libft.h"
 # include <stdlib.h>
+
+typedef struct	s_point
+{
+	int	x;
+	int	y;
+}				t_point;
+
 
 typedef struct	s_map
 {
