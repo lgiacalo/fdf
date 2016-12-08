@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:42:12 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/08 02:17:58 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/08 03:27:52 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,19 @@
 # define ECART_NBR_PIXEL 25
 # define ENDIAN 1
 # define ECART_PT (4 * ECART_NBR_PIXEL)
+# define MIN(x, y) ((x < y) ? (x) : (y))
+# define MAX(x, y) ((x < y) ? (y) : (x))
 
 # include "../minilibx_macos/mlx.h"
 # include "../libft/libft.h"
 # include <stdlib.h>
+# include <math.h>
 
 typedef struct	s_point
 {
 	int	x;
 	int	y;
 }				t_point;
-
 
 typedef struct	s_map
 {

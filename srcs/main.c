@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/08 02:45:08 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/08 04:39:42 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,34 +112,36 @@ int	main(int argc, char **argv)
 	t_point ptB;
 	t_point ptC;
 
-	ptA.x = 2;
-	ptA.y = 1;
-	ptB.x = 65;
-	ptB.y = 185;
+	ptA.x = 65;
+	ptA.y = 185;
+	ptB.x = 1;
+	ptB.y = 2;
 
 
 	mlx_pixel_put(a->mlx, a->win, ptA.x, ptA.y, 0x000000);
 	mlx_pixel_put(a->mlx, a->win, ptB.x, ptB.y, 0x000000);
 
-	if (ABS(ptA.x - ptB.x) < ABS(ptA.y - ptB.y))
-	{
-		ft_swap(&(ptA.x), &(ptB.x));
-		ft_swap(&(ptA.y), &(ptB.y));
-		printf("je suis passee par le swap !!\nDonc un pixel par ligne\n");
-	}
-	else
-		printf("pas de swap !!\nDonc un pixel par colonne\n");
+	printf("valeur point A : (%d,%d)\n", ptA.x, ptA.y);
+	printf("valeur point B : (%d,%d)\n", ptB.x, ptB.y);
+//	if (ABS(ptA.x - ptB.x) < ABS(ptA.y - ptB.y))
+//	{
+//		ft_swap(&(ptA.x), &(ptB.x));
+//		ft_swap(&(ptA.y), &(ptB.y));
+//		printf("je suis passee par le swap !!\nDonc un pixel par ligne\n");
+//	}
+//	else
+//		printf("pas de swap !!\nDonc un pixel par colonne\n");
 
 	printf("valeur point A : (%d,%d)\n", ptA.x, ptA.y);
 	printf("valeur point B : (%d,%d)\n", ptB.x, ptB.y);
 
-		
-	ptC.x = ptB.x;
+
 	ptC.y = 0;
+	ptC.x = MIN(ptA.x, ptB.x);
 	
 	printf("valeur point C : (%d,%d)\n", ptC.x, ptC.y);
 	
-	while (ptC.x <= ptA.x)
+	while (ptC.x <= MAX(ptB.x, ptA.x))
 	{
 		printf("valeur point C dans le while : (%d,%d)\n", ptC.x, ptC.y);
 		ptC.y = ptA.y + (double)((double)(ptB.y - ptA.y)*((double)(ptC.x - ptA.x)/(ptB.x - ptA.x)));
