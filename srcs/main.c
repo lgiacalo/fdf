@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/08 02:21:59 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/08 02:45:08 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,6 @@ int	main(int argc, char **argv)
 	t_point ptB;
 	t_point ptC;
 
-	double	m, p;
-
 	ptA.x = 2;
 	ptA.y = 1;
 	ptB.x = 65;
@@ -135,24 +133,17 @@ int	main(int argc, char **argv)
 	printf("valeur point A : (%d,%d)\n", ptA.x, ptA.y);
 	printf("valeur point B : (%d,%d)\n", ptB.x, ptB.y);
 
-	// http://raphaello.univ-fcomte.fr/IG/Algorithme/Algorithmique.htm 
 		
 	ptC.x = ptB.x;
 	ptC.y = 0;
 	
 	printf("valeur point C : (%d,%d)\n", ptC.x, ptC.y);
 	
-	m = (double)((ptB.y - ptA.y) / (ptB.x - ptA.x));
-	p = ptA.y - (m * ptA.x);
-
 	while (ptC.x <= ptA.x)
 	{
 		printf("valeur point C dans le while : (%d,%d)\n", ptC.x, ptC.y);
-		ptC.y = (int)(m * ptC.x + p);
-		mlx_pixel_put(a->mlx, a->win, ptC.x, (ptC.y + 1), 0x000000);
-		mlx_pixel_put(a->mlx, a->win, (ptC.x + 1), ptC.y, 0x000000);
+		ptC.y = ptA.y + (double)((double)(ptB.y - ptA.y)*((double)(ptC.x - ptA.x)/(ptB.x - ptA.x)));
 		mlx_pixel_put(a->mlx, a->win, ptC.x, ptC.y, 0x000000);
-		mlx_pixel_put(a->mlx, a->win, (ptC.x + 1), (ptC.y + 1), 0x000000);
 		ptC.x++;
 	}
 
