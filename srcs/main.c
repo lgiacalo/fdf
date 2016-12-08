@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/08 05:16:14 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/08 19:48:08 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ int	main(int argc, char **argv)
 	t_point ptB;
 	t_point ptC;
 
-	ptA.x = 65;
-	ptA.y = 185;
+	ptA.x = 185;
+	ptA.y = 65;
 	ptB.x = 1;
 	ptB.y = 2;
 
@@ -121,35 +121,35 @@ int	main(int argc, char **argv)
 	mlx_pixel_put(a->mlx, a->win, ptA.x, ptA.y, 0x000000);
 	mlx_pixel_put(a->mlx, a->win, ptB.x, ptB.y, 0x000000);
 
-	printf("valeur point A : (%d,%d)\n", ptA.x, ptA.y);
-	printf("valeur point B : (%d,%d)\n", ptB.x, ptB.y);
-//	if (ABS(ptA.x - ptB.x) < ABS(ptA.y - ptB.y))
-//	{
-//		ft_swap(&(ptA.x), &(ptB.x));
-//		ft_swap(&(ptA.y), &(ptB.y));
-//		printf("je suis passee par le swap !!\nDonc un pixel par ligne\n");
-//	}
-//	else
-//		printf("pas de swap !!\nDonc un pixel par colonne\n");
-
-	printf("valeur point A : (%d,%d)\n", ptA.x, ptA.y);
-	printf("valeur point B : (%d,%d)\n", ptB.x, ptB.y);
-
-
-	ptC.y = 0;
-	ptC.x = MIN(ptA.x, ptB.x);
+	printf("valeur point A avant condition swap : (%d,%d)\n", ptA.x, ptA.y);
+	printf("valeur point B avant condition swap: (%d,%d)\n", ptB.x, ptB.y);
 	
-	printf("valeur point C : (%d,%d)\n", ptC.x, ptC.y);
-	
-	while (ptC.x <= MAX(ptB.x, ptA.x))
+	if (ABS(ptA.x - ptB.x) < ABS(ptA.y - ptB.y))
 	{
-		printf("valeur point C dans le while : (%d,%d)\n", ptC.x, ptC.y);
-		ptC.y = ptA.y + (double)((double)(ptB.y - ptA.y)*((double)(ptC.x - ptA.x)/(ptB.x - ptA.x)));
-		mlx_pixel_put(a->mlx, a->win, ptC.x, ptC.y, 0x000000);
-		ptC.x++;
+		ptC.x = 0;
+		ptC.y = MIN(ptA.y, ptB.y);
+		while (ptC.y <= MAX(ptB.y, ptA.y))
+		{
+//			printf("valeur point C dans le while : (%d,%d)\n", ptC.x, ptC.y);
+			ptC.x = ptA.x + (double)((double)(ptB.x - ptA.x)*((double)(ptC.y - ptA.y)/(ptB.y - ptA.y)));
+			mlx_pixel_put(a->mlx, a->win, ptC.x, ptC.y, 0x000000);
+			ptC.y++;
+		}	
+		printf("je suis passee par le swap !!\nDonc un pixel par ligne\n");
 	}
-
-
+	else
+	{
+		ptC.y = 0;
+		ptC.x = MIN(ptA.x, ptB.x);
+		while (ptC.x <= MAX(ptB.x, ptA.x))
+		{
+//			printf("valeur point C dans le while : (%d,%d)\n", ptC.x, ptC.y);
+			ptC.y = ptA.y + (double)((double)(ptB.y - ptA.y)*((double)(ptC.x - ptA.x)/(ptB.x - ptA.x)));
+			mlx_pixel_put(a->mlx, a->win, ptC.x, ptC.y, 0x000000);
+			ptC.x++;
+		}
+		printf("pas de swap !!\nDonc un pixel par colonne\n");
+	}
 
 /*	printf("valeur win = %p\n", a->win);
 	mlx_expose_hook(a->win, expose_hook, &a);
