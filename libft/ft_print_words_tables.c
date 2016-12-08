@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_print_words_tables.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/11 02:34:59 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/11/26 15:12:21 by lgiacalo         ###   ########.fr       */
+/*   Created: 2016/08/16 15:48:47 by lgiacalo          #+#    #+#             */
+/*   Updated: 2016/12/08 22:03:23 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+void	ft_print_words_tables(char **tab)
 {
-	while (*s)
+	int i;
+	int j;
+
+	i = 0;
+	while (tab[i] != '\0')
 	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
+		j = 0;
+		while (tab[i][j] != '\0')
+		{
+			ft_putchar(tab[i][j]);
+			j++;
+		}
+		i++;
+		ft_putchar('\n');
 	}
-	if (*s == (char)c)
-		return ((char *)s);
-	return (NULL);
-	
 }

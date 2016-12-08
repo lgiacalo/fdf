@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 06:12:40 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/11/14 20:23:12 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/11/13 06:12:53 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ char	*ft_strupcase(char *str)
 	int i;
 
 	i = 0;
-	if (!str)
-		return (NULL);
 	while (str[i] != '\0')
 	{
 		if (str[i] >= 'a' && str[i] <= 'z')

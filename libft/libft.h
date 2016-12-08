@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 03:07:43 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/11/14 20:08:19 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/08 22:02:43 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 # define LIBFT_H
 
 # define ABS(x) ((x) < 0 ? ((x) * -1) : (x))
+# define BUFF_SIZE 8
 
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
+# include <sys/types.h>
+# include <sys/uio.h>
 
 typedef struct		s_list
 {
@@ -26,6 +29,16 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+typedef struct		s_file
+{
+	char			*str;
+	int				fd;
+	struct s_file	*next;
+}					t_file;
+
+
+int					get_next_line(const int fd, char **line);
+void				ft_print_words_tables(char **tab);
 size_t				ft_strlen(const char *s);
 char				*ft_strdup(const char *s1);
 char				*ft_strcpy(char *dst, const char *src);
@@ -92,7 +105,6 @@ void				ft_lstadd_end(t_list **alst, t_list *new);
 size_t				ft_lstsize(t_list *lst);
 t_list				*ft_lstend(t_list *lst);
 t_list				*ft_lstat(t_list *lst, unsigned int nbr);
-void				ft_lstrev(t_list **alst);
 char				*ft_strrev(char *str);
 void				ft_swap(int *a, int *b);
 int					ft_power(int nb, int power);

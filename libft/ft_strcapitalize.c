@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 06:14:07 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/11/14 20:22:10 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/11/13 06:40:39 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ char	*ft_strcapitalize(char *str)
 	int i;
 
 	i = 1;
-	if (!str)
-		return (NULL);
 	ft_strlowcase(str);
 	if (str[0] != '\0' && str[0] >= 'a' && str[0] <= 'z')
 		str[0] -= 32;

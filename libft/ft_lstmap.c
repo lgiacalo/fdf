@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 05:03:47 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/11/14 19:24:02 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/11/13 05:04:11 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,5 @@ t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 		lst = lst->next;
 	}
 	return (new);
+
 }

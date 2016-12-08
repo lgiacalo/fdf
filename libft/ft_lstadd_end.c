@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 05:03:03 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/11/14 19:24:36 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/11/13 05:03:04 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_lstadd_end(t_list **alst, t_list *new)
 {
 	t_list	*temp;
-
+	
 	temp = *alst;
 	if (!new)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:42:12 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/08 05:19:32 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/08 22:06:53 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "../libft/libft.h"
 # include <stdlib.h>
 # include <math.h>
+# include <fcntl.h>
 
 typedef struct	s_point
 {
@@ -50,5 +51,8 @@ typedef struct	s_env
 	char		*chaine;
 	int			len_chaine; // = 4 * nbrLigne * nbrColonne
 }				t_env;
+
+void	ft_print_words_tables(char **tab);
+
 
 #endif

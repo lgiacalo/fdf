@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 02:46:17 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/11/11 02:53:16 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/11/26 15:21:28 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ char	*ft_strrchr(const char *s, int c)
 			ret = (char *)(s + i);
 		i++;
 	}
-	return (!c) ? (char *)(s + i) : (ret);
+	if (*(s + i) == (char)c)
+		return ((char *)(s + i));
+	return (ret);
 }
