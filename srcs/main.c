@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/08 02:17:55 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/08 02:21:59 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ int	main(int argc, char **argv)
 	printf("valeur point A : (%d,%d)\n", ptA.x, ptA.y);
 	printf("valeur point B : (%d,%d)\n", ptB.x, ptB.y);
 
+	// http://raphaello.univ-fcomte.fr/IG/Algorithme/Algorithmique.htm 
 		
 	ptC.x = ptB.x;
 	ptC.y = 0;
