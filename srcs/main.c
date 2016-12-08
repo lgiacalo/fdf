@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/08 19:48:08 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/08 23:05:35 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,73 @@ int	expose_hook(t_env *env)
 	return (0);
 }
 
-int	ft_read_file(char *tab, t_env *env, t_map map)
+int	ft_display_file(t_list **list, t_map *map)
 {
+	t_list	*temp1;
+	t_list	*temp2;
+	int		i;
 
+	*list = temp1;
+	
+	printf("longeur list = nbr de ligne : %d\n", map->line);
+	if ((map->point = (char**)malloc(sizeof(char*) * (map->line + 1))) == NULL)
+		return (-1);
+	write(1, "555\n", 4);
+	map->point[map->line] = 0;
+	write(1, "555\n", 4);
+	i = 0;
+	while (temp1)
+	{
+		printf("valeur pointeur next : %p\n", temp1->next);
+		printf("valeur pointeur next : %p\n", (temp1->next)->next);
+	//	map->point[i] = (char*)(temp1->content);
+	//	i++;
+	//	temp2 = temp1;
+		temp1 = temp1->next;
+	//	free(temp2);
+	}
+	printf("valeur de i : %d\n", i);
+	return (0);
+	write(1, "666\n", 4);
+	map->col = ft_strlen(map->point[0]);
+	write(1, "777\n", 4);
+	ft_print_words_tables(map->point);
+	write(1, "888\n", 4);
+
+	return (0);
+}
+
+
+
+int	ft_read_file(char *tab, t_env *env, t_map *map)
+{
+	int		fd;
+	t_list	*debut;
+	t_list	*list;
+	char	*temp;
+
+	if ((fd = open(tab, O_RDONLY)) == -1)
+			return (-1);
+	write(1, "111\n", 4);
+	while (get_next_line(fd, &temp) == 1)
+	{
+		printf("buff : %s\t longeur chaine : %zu\n", temp, ft_strlen(temp));
+		list = ft_lstnew((void const*)temp, ft_strlen(temp));
+		printf("valeur : %s\n", (char*)(list->content));
+		ft_lstadd_end(&debut, list);
+		free(temp);
+	}
+	list = debut;
+	map->line = (int)ft_lstsize(list);
+	printf("longeur list = nbr de ligne : %d\n", map->line);
+	printf("valeur premiere ligne : %s\n", (char*)(debut->content));
+	write(1, "222\n", 4);
+	if (close(fd) == -1)
+		return (-1);
+	write(1, "333\n", 4);
+	if (ft_display_file(&debut, map) == -1)
+		return (-1);
+	write(1, "999\n", 4);
 	return (0);
 }
 
@@ -65,7 +129,9 @@ int	main(int argc, char **argv)
 	a = (t_env*)malloc(sizeof(t_env) * 1);
 	b = (t_map*)malloc(sizeof(t_map) * 1);
 
-	//ret = ft_read_file(argv[1], a, b);
+	ret = ft_read_file(argv[1], a, b);
+	if (ret == -1)
+		return (-1);
 
 	a->bit_per_pixel = BIT_PER_PIXEL;
 	a->img_ptr = 2400; // 4*nbr colonne
@@ -103,6 +169,15 @@ int	main(int argc, char **argv)
 		a->chaine[x] = 0;
 		x++;
 	}
+	x = 460 + 2 * a->img_ptr;
+	while (x < (580 + 2 * a->img_ptr))
+	{
+		if ((x + 1) % 4 == 0)
+			x++;
+		a->chaine[x] = 0;
+		x++;
+	}
+
 
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 100, 100);
 
