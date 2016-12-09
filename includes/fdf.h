@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:42:12 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/09 05:02:47 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/09 05:23:13 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ typedef struct	s_point
 
 typedef struct	s_map
 {
-	char		**point;
+//	char		**point;
+	int		**point;
 	int			line;
 	int			col;
 	int			ecart_pt; // = 25 pixels
@@ -55,6 +56,6 @@ typedef struct	s_env
 void			ft_print_words_tables(char **tab);
 int			ft_display_file(char *tab, t_env *env, t_map *map);
 int			ft_read_file(char *tab, t_env *env, t_map *map);
-char			*ft_space(char *str);
+int			*ft_space(char *str, t_map *map);
 
 #endif
