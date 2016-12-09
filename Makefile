@@ -6,15 +6,15 @@
 #    By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/30 19:47:37 by lgiacalo          #+#    #+#              #
-#*   Updated: 2016/12/05 19:05:11 by lgiacalo         ###   ########.fr       *#
+#*   Updated: 2016/12/09 03:12:32 by lgiacalo         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SRC = srcs/main.c\
+SRC = srcs/main.c srcs/file.c
 
-OBJ = main.o\
+OBJ = main.o file.o
 
 LIB = libft/libft.a minilibx_macos/libmlx.a -lmlx -L minilibx_macos/
 

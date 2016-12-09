@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:42:12 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/09 00:22:48 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/09 04:11:16 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,8 @@ typedef struct	s_env
 }				t_env;
 
 void			ft_print_words_tables(char **tab);
+int			ft_display_file(char *tab, t_env *env, t_map *map);
+int			ft_read_file(char *tab, t_env *env, t_map *map);
+char			*ft_space(char *str);
 
 #endif
