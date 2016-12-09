@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/09 02:45:08 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/09 04:44:42 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,88 +48,6 @@ int	expose_hook(t_env *env)
 	return (0);
 }
 
-int	ft_display_file(t_list *list, t_map *map)
-{
-	t_list	*temp1;
-	t_list	*temp2;
-	int		i;
-	char	**mop;
-
-	printf("adresse list : %p\n", list);
-	printf("adresse list-content : %p\n", list->content);
-	list = temp1;
-	ft_putstr((char*)(list->content));
-	write(1, "\n", 1);
-	printf("longeur list = nbr de ligne : %d\n", map->line);
-	if ((mop = (char**)malloc(sizeof(char*) * (map->line + 1))) == NULL)
-		return (-1);
-	write(1, "555\n", 4);
-	mop[map->line] = 0;
-	write(1, "555\n", 4);
-	i = 0;
-	while (temp1)
-	{
-		printf("ligne %d : %s\n", i, (char*)((list)->content));
-		printf("valeur pointeur next : %p\n", temp1->next);
-		mop[i] = ft_strdup((char*)(temp1->content));
-		write(1, "grrr\n", 5);
-		i++;
-		temp2 = temp1;
-		temp1 = temp1->next;
-	//	free(temp2);
-	}
-	printf("valeur de i : %d\n", i);
-	return (0);
-	write(1, "666\n", 4);
-	map->col = ft_strlen(mop[0]);
-	write(1, "777\n", 4);
-	ft_print_words_tables(mop);
-	write(1, "888\n", 4);
-
-	return (0);
-}
-
-
-
-int	ft_read_file(char *tab, t_env *env, t_map *map)
-{
-	int		fd;
-	int		len;
-	t_list	*debut;
-	t_list	*list;
-	char	*temp;
-
-	if ((fd = open(tab, O_RDONLY)) == -1)
-			return (-1);
-	write(1, "111\n", 4);
-	while (get_next_line(fd, &temp) == 1)
-	{
-		printf("buff : %s\t len : %zu\n", temp, ft_strlen(temp));
-		len = ft_strlen(temp);
-		list = ft_lstnew((void const*)temp, ((size_t)len + 1));
-		printf("valeur : %s\n", (char*)(list->content));
-		ft_lstadd_end(&debut, list);
-	}
-	list = debut;
-	map->line = (int)ft_lstsize(list);
-	printf("longeur list = nbr de ligne : %d\n", map->line);
-	printf("premiere ligne : %s\n", (char*)(debut->content));
-	printf("seconde ligne : %s\n", (char*)(debut->next)->content);
-	printf("troisieme ligne : %s\n", (char*)((debut->next)->next)->content);
-	write(1, "222\n", 4);
-	printf("adresse list : %p\n", debut);
-	printf("adresse list-content : %p\n", debut->content);
-	if (close(fd) == -1)
-		return (-1);
-	write(1, "333\n", 4);
-	if (ft_display_file(debut, map) == -1)
-		return (-1);
-	write(1, "999\n", 4);
-	return (0);
-}
-
-
-
 int	main(int argc, char **argv)
 {
 	t_env	*a;
@@ -142,6 +60,8 @@ int	main(int argc, char **argv)
 	ret = ft_read_file(argv[1], a, b);
 	if (ret == -1)
 		return (-1);
+
+	ft_print_words_tables(b->point);
 
 	a->bit_per_pixel = BIT_PER_PIXEL;
 	a->img_ptr = 2400; // 4*nbr colonne
