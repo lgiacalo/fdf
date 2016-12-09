@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:42:12 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/09 22:49:49 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/09 23:09:29 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define FDF_H
 
 # define BIT_PER_PIXEL 32
-# define ECART_NBR_PIXEL 25
+# define ECART_NBR_PIXEL 30
 # define ENDIAN 1
-# define ECART_PT (4 * ECART_NBR_PIXEL)
+# define ECART_CASE (4 * ECART_NBR_PIXEL)
 # define MIN(x, y) ((x < y) ? (x) : (y))
 # define MAX(x, y) ((x < y) ? (y) : (x))
 
@@ -38,7 +38,7 @@ typedef struct	s_map
 	int		**point;
 	int			line;
 	int			col;
-	int			ecart_pt; // = 25 pixels
+	int			ecart_case;
 }				t_map;
 
 typedef struct	s_env
@@ -46,7 +46,7 @@ typedef struct	s_env
 	void		*mlx;
 	void		*win;
 	void		*img;
-	int			bit_per_pixel; // = 32 en bits = 4 octets
+	int			bit_per_pixel;
 	int			img_ptr; // en octet = 4 * (ECART_PT + NBR_COL) + ECART_PT
 	int			endian;
 	char		*chaine;

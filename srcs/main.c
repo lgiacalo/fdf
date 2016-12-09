@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/09 22:52:42 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/09 23:11:18 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ int	main(int argc, char **argv)
 	if (ret == -1)
 		return (-1);
 
+	printf("VALEUR DE IMG_PTR : %d\n", a->img_ptr);
+	printf("VALEUR DE ECART_CASE : %d\n", b->ecart_case);
+
 	x = 0;
 	y = 0;
 	while (x < b->line)
@@ -76,9 +79,7 @@ int	main(int argc, char **argv)
 	}
 
 
-	a->bit_per_pixel = BIT_PER_PIXEL;
 	a->img_ptr = 2400; // 4*nbr colonne
-	a->endian = ENDIAN;
 	a->len_chaine = 1440000;
 
 	if ((a->mlx = mlx_init(0)) == NULL)
@@ -96,7 +97,7 @@ int	main(int argc, char **argv)
 	printf("valeur en int de la couleur bleu : %d\n", mlx_get_color_value(a->mlx, 0x0000FF));
 	a->win = mlx_new_window(a->mlx, 800, 800, "MECHANT !!!!");
 	draw(a->mlx, a->win);
-	printf("ecart entre les points en octet : %d\n", ECART_PT);
+	printf("ecart entre les points en octet : %d\n", ECART_CASE);
 	while (x < a->len_chaine)
 	{
 		if ((x + 1) % 4 == 0)

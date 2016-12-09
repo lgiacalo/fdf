@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 03:07:04 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/09 22:51:46 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/09 23:09:27 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,15 @@ static int	ft_display_file(char *tab, t_env *env, t_map *map)
 	return (0);
 }
 
+static void	ft_remplissage(t_env *env, t_map *map)
+{
+	env->bit_per_pixel = BIT_PER_PIXEL;
+	env->endian = ENDIAN;
+	env->img_ptr = map->col * (ECART_CASE + 4) + ECART_CASE;
+	
+	map->ecart_case = ECART_CASE;
+
+}
 
 int		ft_read_file(char *tab, t_env *env, t_map *map)
 {
@@ -75,5 +84,6 @@ int		ft_read_file(char *tab, t_env *env, t_map *map)
 		return (-1);
 	if ((ft_display_file(tab, env, map) == -1))
 		return (-1);
+	ft_remplissage(env, map);
 	return (0);
 }
