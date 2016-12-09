@@ -6,14 +6,13 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 03:07:04 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/09 06:05:50 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/09 22:51:46 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include <stdio.h>
 
-int	*ft_space(char *str, t_map *map)
+static int	*ft_space(char *str, t_map *map)
 {
 	int	*new;
 	char	**split;
@@ -32,7 +31,7 @@ int	*ft_space(char *str, t_map *map)
 	return (new);
 }
 
-int	ft_display_file(char *tab, t_env *env, t_map *map)
+static int	ft_display_file(char *tab, t_env *env, t_map *map)
 {
 	int	fd;
 	int	i;
@@ -57,7 +56,7 @@ int	ft_display_file(char *tab, t_env *env, t_map *map)
 }
 
 
-int	ft_read_file(char *tab, t_env *env, t_map *map)
+int		ft_read_file(char *tab, t_env *env, t_map *map)
 {
 	int		fd;
 	int		i;
