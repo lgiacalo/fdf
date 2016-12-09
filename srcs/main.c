@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/09 05:18:17 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/09 05:59:58 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int argc, char **argv)
 {
 	t_env	*a;
 	t_map	*b;
-	int		x, ret;
+	int		x, y, ret;
 
 	a = (t_env*)malloc(sizeof(t_env) * 1);
 	b = (t_map*)malloc(sizeof(t_map) * 1);
@@ -61,7 +61,20 @@ int	main(int argc, char **argv)
 	if (ret == -1)
 		return (-1);
 
-	ft_print_words_tables(b->point);
+	x = 0;
+	y = 0;
+	while (x < b->line)
+	{
+		y = 0;
+		while (y < b->col)
+		{
+			printf(": %d :", b->point[x][y]);
+			y++;
+		}
+		printf("\n");
+		x++;
+	}
+/*
 
 	a->bit_per_pixel = BIT_PER_PIXEL;
 	a->img_ptr = 2400; // 4*nbr colonne
@@ -156,12 +169,12 @@ int	main(int argc, char **argv)
 		printf("pas de swap !!\nDonc un pixel par colonne\n");
 	}
 
-/*	printf("valeur win = %p\n", a->win);
+	printf("valeur win = %p\n", a->win);
 	mlx_expose_hook(a->win, expose_hook, &a);
 	draw(a->mlx, a->win);
 */
-	mlx_key_hook(a->win, my_key_funct, 0);
-
-	mlx_loop(a->mlx);
+//	mlx_key_hook(a->win, my_key_funct, 0);
+//
+//	mlx_loop(a->mlx);
 	return (0);
 }

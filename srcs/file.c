@@ -6,36 +6,26 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 03:07:04 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/09 05:14:49 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/09 05:55:25 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 #include <stdio.h>
 
-char	*ft_space(char *str)
+int	*ft_space(char *str, t_map *map)
 {
-	char	*new;
+	int	*new;
+	char	**split;
 	int	len;
-	int	i;
 
-	i = -1;
-	len = 0;
-	while (str[++i] != '\0')
-		if (str[i] != ' ')
-			len++;
-	new = (char*)malloc(sizeof(char) * (len + 1));
-	new[len] = '\0';
-	len = 0;
-	i = -1;
-	while (str[++i] != '\0')
-	{
-		if (str[i] != ' ')
-		{
-			new[len] = str[i];
-			len++;
-		}
-	}
+	map->col = ft_nbwords(str, ' ');
+	if (!(new = (int*)malloc(sizeof(int) * (map->col))))
+		return (NULL);
+	len = -1;
+	split = ft_strsplit((char const*)str, ' ');
+	while (++len < map->col)
+		new[len] = ft_atoi(split[len]);
 	return (new);
 }
 
@@ -45,7 +35,7 @@ int	ft_display_file(char *tab, t_env *env, t_map *map)
 	int	i;
 	char	*temp1;
 
-	if ((map->point = (char**)malloc(sizeof(char*) * (map->line + 1))) == NULL)
+	if (!(map->point = (int**)malloc(sizeof(int*) * (map->line + 1))))
 		return (-1);
 	map->point[map->line] = 0;
 	i = 0;
@@ -53,7 +43,8 @@ int	ft_display_file(char *tab, t_env *env, t_map *map)
 		return (-1);
 	while (get_next_line(fd, &temp1) == 1)
 	{
-		map->point[i] = ft_space(temp1);
+		if (!(map->point[i] = ft_space(temp1, map)))
+			return (-1);
 		free(temp1);
 		i++;
 	}
