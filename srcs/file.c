@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 03:07:04 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/09 05:55:25 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/09 06:05:50 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ int	*ft_space(char *str, t_map *map)
 	split = ft_strsplit((char const*)str, ' ');
 	while (++len < map->col)
 		new[len] = ft_atoi(split[len]);
+	len = -1;
+	while (++len < map->col)
+		free(split[len]);
 	return (new);
 }
 

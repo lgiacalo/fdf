@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/09 05:59:58 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/09 06:04:10 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ int	main(int argc, char **argv)
 		y = 0;
 		while (y < b->col)
 		{
-			printf(": %d :", b->point[x][y]);
+			printf("%d.", b->point[x][y]);
 			y++;
 		}
 		printf("\n");
 		x++;
 	}
-/*
+
 
 	a->bit_per_pixel = BIT_PER_PIXEL;
 	a->img_ptr = 2400; // 4*nbr colonne
@@ -168,13 +168,13 @@ int	main(int argc, char **argv)
 		}
 		printf("pas de swap !!\nDonc un pixel par colonne\n");
 	}
-
+/*
 	printf("valeur win = %p\n", a->win);
 	mlx_expose_hook(a->win, expose_hook, &a);
 	draw(a->mlx, a->win);
 */
-//	mlx_key_hook(a->win, my_key_funct, 0);
-//
-//	mlx_loop(a->mlx);
+	mlx_key_hook(a->win, my_key_funct, 0);
+
+	mlx_loop(a->mlx);
 	return (0);
 }
