@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strdigit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/11 02:34:59 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/11/26 15:12:21 by lgiacalo         ###   ########.fr       */
+/*   Created: 2016/12/12 00:18:50 by lgiacalo          #+#    #+#             */
+/*   Updated: 2016/12/12 00:22:13 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+int	ft_strdigit(char *str)
 {
-	while (*s)
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
 	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
+		if (!(ft_isdigit(str[i])))
+			return (0);
+		i++;
 	}
-	if (*s == (char)c)
-		return ((char *)s);
-	return (NULL);
-	
+	return (1);
 }

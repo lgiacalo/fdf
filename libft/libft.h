@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 03:07:43 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/09 00:20:55 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/12 00:40:50 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
-# include <sys/types.h>
-# include <sys/uio.h>
 
 typedef struct		s_list
 {
@@ -31,13 +29,12 @@ typedef struct		s_list
 
 typedef struct		s_file
 {
-	char			*str;
-	int				fd;
+	char		*str;
+	int		fd;
 	struct s_file	*next;
-}					t_file;
+}			t_file;
 
-int					get_next_line(const int fd, char **line);
-void				ft_print_words_tables(char **tab);
+int				get_next_line(const int fd, char **line);
 size_t				ft_strlen(const char *s);
 char				*ft_strdup(const char *s1);
 char				*ft_strcpy(char *dst, const char *src);
@@ -113,5 +110,6 @@ int					ft_find_next_prime(int nb);
 char				*ft_strupcase(char *str);
 char				*ft_strlowcase(char *str);
 char				*ft_strcapitalize(char *str);
+int				ft_strdigit(char *str);
 
 #endif

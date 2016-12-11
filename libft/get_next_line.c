@@ -6,13 +6,13 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 12:48:51 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/09 00:18:45 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/12 00:42:05 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_verif_fin(char **str, int ret, char **line)
+static int	ft_verif_fin(char **str, int ret, char **line)
 {
 	if (ret != -1 && **str != '\0')
 	{
@@ -24,7 +24,7 @@ int		ft_verif_fin(char **str, int ret, char **line)
 	return (0);
 }
 
-int		ft_verif_buff(char **str, char *buff, char **line)
+static int	ft_verif_buff(char **str, char *buff, char **line)
 {
 	char	*temp;
 
@@ -53,7 +53,7 @@ int		ft_verif_buff(char **str, char *buff, char **line)
 	return (0);
 }
 
-int		ft_verif_str(char **str, char **line)
+static int	ft_verif_str(char **str, char **line)
 {
 	char	*temp;
 	char	*temp2;
@@ -71,7 +71,7 @@ int		ft_verif_str(char **str, char **line)
 	return (0);
 }
 
-t_file	*ft_verif_fd(t_file **liste, int fd)
+static t_file	*ft_verif_fd(t_file **liste, int fd)
 {
 	t_file	*temp2;
 	t_file	*temp1;

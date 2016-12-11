@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 03:07:04 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/11 21:16:32 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/12 00:33:36 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,9 @@ int		ft_read_file(char *tab, t_env *env, t_map *map)
 		free(temp2);
 		i++;
 	}
-	map->line = i;
-	if ((close(fd) == -1))
+	if ((i <= 0) || (close(fd) == -1))
 		return (-1);
+	map->line = i;
 	if ((ft_display_file(tab, env, map) == -1))
 		return (-1);
 	ft_remplissage(env, map);
@@ -138,7 +138,7 @@ void	ft_affichage(t_env *env, t_map *map)
 	printf("Nombre de ligne : %d\n\n", map->line);
 	printf("Ecart entre les points : %d pixels, soit %d\n", ECT_PIX, map->ecart_case);
 	printf("Longueur d'une ligne : %d\n", env->img_ptr);
-	printf("Longeur de toutes les lignes : %d\n\n", env->len_str);
+	printf("Longeur de toutes les lignes : %d\n", env->len_str);
 	printf("Nombre de ligne en plus (en bas et en haut) : %d\n\n", map->h_more);
 
 
