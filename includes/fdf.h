@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:42:12 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/11 19:43:14 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/11 21:16:36 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,14 @@ typedef struct	s_env
 {
 	void	*mlx;
 	void	*win;
+	t_point	len_win;
 	void	*img;
 	t_point	len_img;
 	int	bit_per_pixel;
 	int	img_ptr;
 	int	endian;
-	char	*chaine;
-	int	len_chaine; // = img_ptr * (col + (ecart_case * (col + 1 +indice)))
+	char	*str;
+	int	len_str; // = img_ptr * (col + (ecart_case * (col + 1 +indice)))
 }		t_env;
 
 int		ft_read_file(char *tab, t_env *env, t_map *map);

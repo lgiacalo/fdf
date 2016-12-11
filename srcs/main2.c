@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/08 23:59:42 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/11 21:16:31 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,62 +48,11 @@ int	expose_hook(t_env *env)
 	return (0);
 }
 
-int	ft_display_file(t_list **list, t_map *map)
-{
-	return (0);
-}
-
-
-
-int	ft_read_file(char *tab, t_env *env, t_map *map)
-{
-	int		fd;
-	int		i;
-	char	*temp;
-
-	write(1, "merde\n", 6);
-	if ((fd = open(tab, O_RDONLY)) == -1)
-			return (-1);
-	i = 0;
-	write(1, "merde\n", 6);
-	while (get_next_line(fd, &temp) == 1)
-	{
-		free(temp);
-		i++;
-	}
-	write(1, "merde\n", 6);
-	map->line = i;
-	write(1, "merde\n", 6);
-	if ((close(fd) == -1) && ((fd = open(tab, O_RDONLY)) == -1))
-		return (-1);
-	write(1, "merde\n", 6);
-	if ((map->point = (char**)malloc(sizeof(char*) * (i + 1))) == NULL)
-		return (-1);
-	write(1, "merde\n", 6);
-	map->point[i] = 0;
-	i = 0;
-	write(1, "merde\n", 6);
-	printf("valeur fd : %d\n", fd);
-	while (get_next_line(fd, &temp) == 1)
-	{
-		map->point[i] = temp;
-		printf("LIGNE : %d\n", i);
-		printf("dans le buf : %s\n", temp);
-		printf("dans le map : %s\n", map->point[i]);
-		i++;
-	}
-	write(1, "merde\n", 6);
-	//printf("troisieme ligne : %s\n", map->point[2]);
-	return (0);
-}
-
-
-
 int	main(int argc, char **argv)
 {
 	t_env	*a;
 	t_map	*b;
-	int		x, ret;
+	int		x, y, ret;
 
 	a = (t_env*)malloc(sizeof(t_env) * 1);
 	b = (t_map*)malloc(sizeof(t_map) * 1);
@@ -112,32 +61,22 @@ int	main(int argc, char **argv)
 	if (ret == -1)
 		return (-1);
 
-	a->bit_per_pixel = BIT_PER_PIXEL;
-	a->img_ptr = 2400; // 4*nbr colonne
-	a->endian = ENDIAN;
-	a->len_chaine = 1440000;
-
-	if ((a->mlx = mlx_init(0)) == NULL)
+	if (!(a->mlx = mlx_init(0)))
 		return (EXIT_FAILURE);
-	if ((a->img = mlx_new_image(a->mlx, 600, 600)) == NULL)
+	if (!(a->img = mlx_new_image(a->mlx, a->len_img.x, a->len_img.y)))
 		return (EXIT_FAILURE);
-	if ((a->chaine = mlx_get_data_addr(a->img, &(a->bit_per_pixel), &(a->img_ptr), &(a->endian))) == NULL)
+	if (!(a->str = mlx_get_data_addr(a->img, &(a->bit_per_pixel), &(a->img_ptr), &(a->endian))))
 		return (EXIT_FAILURE);
-	write(1, "5merde\n", 7);
-
+	if (!(a->win = mlx_new_window(a->mlx, a->len_win.x, a->len_win.y, "FDF")))
+		return (EXIT_FAILURE);
 
 	x = 0;
-	printf("valeur en int de la couleur rouge : %d\n", mlx_get_color_value(a->mlx, 0xFF0000));
-	printf("valeur en int de la couleur blanc : %d\n", mlx_get_color_value(a->mlx, 0xFFFFFF));
-	printf("valeur en int de la couleur bleu : %d\n", mlx_get_color_value(a->mlx, 0x0000FF));
-	a->win = mlx_new_window(a->mlx, 800, 800, "MECHANT !!!!");
 	draw(a->mlx, a->win);
-	printf("ecart entre les points en octet : %d\n", ECART_PT);
-	while (x < a->len_chaine)
+	while (x < a->len_str)
 	{
 		if ((x + 1) % 4 == 0)
 			x++;
-		a->chaine[x] = 250;
+		a->str[x] = 250;
 		x++;
 	}
 	x = 460;
@@ -145,7 +84,7 @@ int	main(int argc, char **argv)
 	{
 		if ((x + 1) % 4 == 0)
 			x++;
-		a->chaine[x] = 0;
+		a->str[x] = 0;
 		x++;
 	}
 	x = 460 + 2 * a->img_ptr;
@@ -153,14 +92,12 @@ int	main(int argc, char **argv)
 	{
 		if ((x + 1) % 4 == 0)
 			x++;
-		a->chaine[x] = 0;
+		a->str[x] = 0;
 		x++;
 	}
 
 
-	mlx_put_image_to_window(a->mlx, a->win, a->img, 100, 100);
-
-	printf("valeur chaine = %p\n", a->chaine);
+	mlx_put_image_to_window(a->mlx, a->win, a->img, 50, 50);
 
 	t_point ptA;
 	t_point ptB;
@@ -204,8 +141,8 @@ int	main(int argc, char **argv)
 		}
 		printf("pas de swap !!\nDonc un pixel par colonne\n");
 	}
-
-/*	printf("valeur win = %p\n", a->win);
+/*
+	printf("valeur win = %p\n", a->win);
 	mlx_expose_hook(a->win, expose_hook, &a);
 	draw(a->mlx, a->win);
 */

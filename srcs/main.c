@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/11 19:43:11 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/11 21:17:49 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,47 +61,22 @@ int	main(int argc, char **argv)
 	if (ret == -1)
 		return (-1);
 
-	printf("VALEUR DE IMG_PTR : %d\n", a->img_ptr);
-	printf("VALEUR DE ECART_CASE : %d\n", b->ecart_case);
+	if (!(a->mlx = mlx_init(0)))
+		return (EXIT_FAILURE);
+	if (!(a->img = mlx_new_image(a->mlx, a->len_img.x, a->len_img.y)))
+		return (EXIT_FAILURE);
+	if (!(a->str = mlx_get_data_addr(a->img, &(a->bit_per_pixel), &(a->img_ptr), &(a->endian))))
+		return (EXIT_FAILURE);
+	if (!(a->win = mlx_new_window(a->mlx, a->len_win.x, a->len_win.y, "FDF")))
+		return (EXIT_FAILURE);
 
 	x = 0;
-	y = 0;
-	while (x < b->line)
-	{
-		y = 0;
-		while (y < b->col)
-		{
-			printf("%d.", b->point[x][y]);
-			y++;
-		}
-		printf("\n");
-		x++;
-	}
-
-
-//	a->len_chaine = 1440000;
-
-	if ((a->mlx = mlx_init(0)) == NULL)
-		return (EXIT_FAILURE);
-	if ((a->img = mlx_new_image(a->mlx, a->len_img.x, a->len_img.y)) == NULL)
-		return (EXIT_FAILURE);
-	if ((a->chaine = mlx_get_data_addr(a->img, &(a->bit_per_pixel), &(a->img_ptr), &(a->endian))) == NULL)
-		return (EXIT_FAILURE);
-	write(1, "5merde\n", 7);
-
-
-	x = 0;
-	printf("valeur en int de la couleur rouge : %d\n", mlx_get_color_value(a->mlx, 0xFF0000));
-	printf("valeur en int de la couleur blanc : %d\n", mlx_get_color_value(a->mlx, 0xFFFFFF));
-	printf("valeur en int de la couleur bleu : %d\n", mlx_get_color_value(a->mlx, 0x0000FF));
-	a->win = mlx_new_window(a->mlx, (a->len_img.x + 100), (a->len_img.y + 100), "MECHANT !!!!");
 	draw(a->mlx, a->win);
-	printf("ecart entre les points en octet : %d\n", ECART_CASE);
-	while (x < a->len_chaine)
+	while (x < a->len_str)
 	{
 		if ((x + 1) % 4 == 0)
 			x++;
-		a->chaine[x] = 250;
+		a->str[x] = 250;
 		x++;
 	}
 	x = 460;
@@ -109,7 +84,7 @@ int	main(int argc, char **argv)
 	{
 		if ((x + 1) % 4 == 0)
 			x++;
-		a->chaine[x] = 0;
+		a->str[x] = 0;
 		x++;
 	}
 	x = 460 + 2 * a->img_ptr;
@@ -117,14 +92,12 @@ int	main(int argc, char **argv)
 	{
 		if ((x + 1) % 4 == 0)
 			x++;
-		a->chaine[x] = 0;
+		a->str[x] = 0;
 		x++;
 	}
 
 
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 50, 50);
-
-	printf("valeur chaine = %p\n", a->chaine);
 
 	t_point ptA;
 	t_point ptB;
@@ -139,21 +112,16 @@ int	main(int argc, char **argv)
 	mlx_pixel_put(a->mlx, a->win, ptA.x, ptA.y, 0x000000);
 	mlx_pixel_put(a->mlx, a->win, ptB.x, ptB.y, 0x000000);
 
-	printf("valeur point A avant condition swap : (%d,%d)\n", ptA.x, ptA.y);
-	printf("valeur point B avant condition swap: (%d,%d)\n", ptB.x, ptB.y);
-	
 	if (ABS(ptA.x - ptB.x) < ABS(ptA.y - ptB.y))
 	{
 		ptC.x = 0;
 		ptC.y = MIN(ptA.y, ptB.y);
 		while (ptC.y <= MAX(ptB.y, ptA.y))
 		{
-//			printf("valeur point C dans le while : (%d,%d)\n", ptC.x, ptC.y);
 			ptC.x = ptA.x + (double)((double)(ptB.x - ptA.x)*((double)(ptC.y - ptA.y)/(ptB.y - ptA.y)));
 			mlx_pixel_put(a->mlx, a->win, ptC.x, ptC.y, 0x000000);
 			ptC.y++;
 		}	
-		printf("je suis passee par le swap !!\nDonc un pixel par ligne\n");
 	}
 	else
 	{
@@ -161,12 +129,10 @@ int	main(int argc, char **argv)
 		ptC.x = MIN(ptA.x, ptB.x);
 		while (ptC.x <= MAX(ptB.x, ptA.x))
 		{
-//			printf("valeur point C dans le while : (%d,%d)\n", ptC.x, ptC.y);
 			ptC.y = ptA.y + (double)((double)(ptB.y - ptA.y)*((double)(ptC.x - ptA.x)/(ptB.x - ptA.x)));
 			mlx_pixel_put(a->mlx, a->win, ptC.x, ptC.y, 0x000000);
 			ptC.x++;
 		}
-		printf("pas de swap !!\nDonc un pixel par colonne\n");
 	}
 /*
 	printf("valeur win = %p\n", a->win);
