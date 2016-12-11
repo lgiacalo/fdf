@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/10 22:38:45 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/11 19:43:11 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,11 @@ int	main(int argc, char **argv)
 	}
 
 
-	a->img_ptr = 2400; // 4*nbr colonne
-	a->len_chaine = 1440000;
+//	a->len_chaine = 1440000;
 
 	if ((a->mlx = mlx_init(0)) == NULL)
 		return (EXIT_FAILURE);
-	if ((a->img = mlx_new_image(a->mlx, 600, 600)) == NULL)
+	if ((a->img = mlx_new_image(a->mlx, a->len_img.x, a->len_img.y)) == NULL)
 		return (EXIT_FAILURE);
 	if ((a->chaine = mlx_get_data_addr(a->img, &(a->bit_per_pixel), &(a->img_ptr), &(a->endian))) == NULL)
 		return (EXIT_FAILURE);
@@ -95,7 +94,7 @@ int	main(int argc, char **argv)
 	printf("valeur en int de la couleur rouge : %d\n", mlx_get_color_value(a->mlx, 0xFF0000));
 	printf("valeur en int de la couleur blanc : %d\n", mlx_get_color_value(a->mlx, 0xFFFFFF));
 	printf("valeur en int de la couleur bleu : %d\n", mlx_get_color_value(a->mlx, 0x0000FF));
-	a->win = mlx_new_window(a->mlx, 800, 800, "MECHANT !!!!");
+	a->win = mlx_new_window(a->mlx, (a->len_img.x + 100), (a->len_img.y + 100), "MECHANT !!!!");
 	draw(a->mlx, a->win);
 	printf("ecart entre les points en octet : %d\n", ECART_CASE);
 	while (x < a->len_chaine)
@@ -123,7 +122,7 @@ int	main(int argc, char **argv)
 	}
 
 
-	mlx_put_image_to_window(a->mlx, a->win, a->img, 100, 100);
+	mlx_put_image_to_window(a->mlx, a->win, a->img, 50, 50);
 
 	printf("valeur chaine = %p\n", a->chaine);
 

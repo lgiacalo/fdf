@@ -6,11 +6,12 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 03:07:04 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/10 22:38:47 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/11 19:43:05 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include <stdio.h>
 
 static int	*ft_space(char *str, t_map *map)
 {
@@ -55,6 +56,34 @@ static int	ft_display_file(char *tab, t_env *env, t_map *map)
 	return (0);
 }
 
+static void	ft_len_map(t_env *env, t_map *map)
+{
+	int	x;
+	int	y;
+	int	h;
+
+	x = -1;
+	h = 0;
+	while (++x < map->line)
+	{
+		y = -1;
+		h = 0;
+		while (++y < map->col)
+			if (ABS(h) < ABS(map->point[x][y]))
+				h = ABS(map->point[x][y]);
+		if (h > (MIN(x, (map->line - x)) * ECT_PIX / 3))
+			if (map->h_more < (h - MIN(x, (map->line - x)) * ECT_PIX / 3))
+				map->h_more = h - MIN(x, (map->line - x)) * ECT_PIX / 3;
+	}
+	env->len_chaine = (2 * (map->h_more*env->img_ptr) + (env->img_ptr *(map->line + ((map->line - 1) * ECT_PIX))));
+	env->len_img.x = ECT_PIX + map->col + (map->col * ECT_PIX);
+	env->len_img.y = (2 * map->h_more) + map->line + ((map->line - 1) * ECT_PIX);
+	printf("VALEUR X : %d\n", env->len_img.x);
+	printf("VALEUR Y : %d\n", env->len_img.y);
+	printf("VALEUR LEN_CHAINE : %d\n", env->len_chaine);
+	printf("VALEUR H_MORE : %d\n", map->h_more);
+}
+
 static void	ft_remplissage(t_env *env, t_map *map)
 {
 	env->bit_per_pixel = BIT_PER_PIXEL;
@@ -62,7 +91,8 @@ static void	ft_remplissage(t_env *env, t_map *map)
 	env->img_ptr = map->col * (ECART_CASE + 4) + ECART_CASE;
 	
 	map->ecart_case = ECART_CASE;
-
+	map->h_more = 0;
+	ft_len_map(env, map);
 }
 
 int		ft_read_file(char *tab, t_env *env, t_map *map)
