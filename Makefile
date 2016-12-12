@@ -6,15 +6,15 @@
 #    By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/30 19:47:37 by lgiacalo          #+#    #+#              #
-#*   Updated: 2016/12/12 00:43:40 by lgiacalo         ###   ########.fr       *#
+#*   Updated: 2016/12/12 13:29:20 by lgiacalo         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SRC = srcs/main.c srcs/file.c srcs/point.c
+SRC = srcs/main.c srcs/file.c srcs/point.c srcs/remplissage.c
 
-OBJ = main.o file.o point.o
+OBJ = main.o file.o point.o remplissage.o
 
 LIB = libft/libft.a minilibx_macos/libmlx.a -lmlx -L minilibx_macos/
 

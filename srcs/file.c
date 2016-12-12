@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 03:07:04 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/12 00:33:36 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/12 13:44:03 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,49 +58,21 @@ static int	ft_display_file(char *tab, t_env *env, t_map *map)
 	return (0);
 }
 
-static void	ft_len_map(t_env *env, t_map *map)
+static int		ft_digit(char *str)
 {
-	int	x;
-	int	y;
-	int	h;
+	int	i;
 
-	x = -1;
-	h = 0;
-	while (++x < map->line)
+	i = 0;
+	while (str[i] != '\0')
 	{
-		y = -1;
-		h = 0;
-		while (++y < map->col)
-			if (ABS(h) < ABS(map->point[x][y]))
-				h = ABS(map->point[x][y]);
-		if (h > (MIN(x, (map->line - x)) * ECT_PIX / 3))
-			if (map->h_more < (h - MIN(x, (map->line - x))
-				* ECT_PIX / 3))
-				map->h_more = h - MIN(x, (map->line - x))
-				* ECT_PIX / 3;
+		if (str[i] != ' ' && !(ft_isdigit(str[i])))
+			return (0);
+		i++;
 	}
+	return (1);
 }
 
-static void	ft_remplissage(t_env *env, t_map *map)
-{
-	env->bit_per_pixel = BIT_PER_PIXEL;
-	env->endian = ENDIAN;
-	env->img_ptr = map->col * (ECART_CASE + 4) + ECART_CASE;
-	
-	map->ecart_case = ECART_CASE;
-	map->h_more = 0;
-	ft_len_map(env, map);
-	env->len_str = (2 * (map->h_more*env->img_ptr) +
-	(env->img_ptr *(map->line + ((map->line - 1) * ECT_PIX))));
-	env->len_img.x = ECT_PIX + map->col + (map->col * ECT_PIX);
-	env->len_img.y = (2 * map->h_more) + map->line +
-	((map->line - 1) * ECT_PIX);
-	env->len_win.x = env->len_img.x + 100;
-	env->len_win.y = env->len_img.y + 100;
-
-}
-
-int		ft_read_file(char *tab, t_env *env, t_map *map)
+int	ft_read_file(char *tab, t_env *env, t_map *map)
 {
 	int		fd;
 	int		i;
@@ -111,6 +83,11 @@ int		ft_read_file(char *tab, t_env *env, t_map *map)
 	i = 0;
 	while (get_next_line(fd, &temp2) == 1)
 	{
+		if (!(ft_digit(temp2)))
+		{
+			free(temp2);
+			return (-1);
+		}
 		free(temp2);
 		i++;
 	}

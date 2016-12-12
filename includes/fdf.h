@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:42:12 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/12 00:19:12 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/12 13:36:27 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ typedef struct	s_env
 }		t_env;
 
 int		ft_read_file(char *tab, t_env *env, t_map *map);
+void		ft_remplissage(t_env *env, t_map *map);
 
 #endif
