@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 03:07:04 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/12 13:44:03 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/13 05:44:37 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,11 @@ void	ft_affichage(t_env *env, t_map *map)
 	int	x, y;
 
 	printf("\n\tTAILLE WINDOW\n");
-	printf("VALEUR X : %d\t/\t", env->len_win.x);
-	printf("VALEUR Y : %d\n\n", env->len_win.y);
+	printf("VALEUR X : %f\t/\t", env->len_win.x);
+	printf("VALEUR Y : %f\n\n", env->len_win.y);
 	printf("\tTAILLE IMAGE\n");
-	printf("VALEUR X : %d\t/\t", env->len_img.x);
-	printf("VALEUR Y : %d\n\n", env->len_img.y);
+	printf("VALEUR X : %f\t/\t", env->len_img.x);
+	printf("VALEUR Y : %f\n\n", env->len_img.y);
 	printf("Nombre de colonne : %d\n", map->col);
 	printf("Nombre de ligne : %d\n\n", map->line);
 	printf("Ecart entre les points : %d pixels, soit %d\n", ECT_PIX, map->ecart_case);

@@ -6,38 +6,55 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 00:03:24 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/12 16:14:14 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/13 05:44:31 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	ft_trait(t_env *env, t_point ptA, t_point ptB)
+void	ft_trait(t_env *env, t_point a, t_point b)
 {
-	t_point ptC;
+	t_point c;
 	
-	mlx_pixel_put(env->mlx, env->win, ptA.x, ptA.y, 0x000000);
-	mlx_pixel_put(env->mlx, env->win, ptB.x, ptB.y, 0x000000);
-	if (ABS(ptA.x - ptB.x) < ABS(ptA.y - ptB.y))
+	if (ABS(a.x - b.x) < ABS(a.y - b.y))
 	{
-		ptC.x = 0;
-		ptC.y = MIN(ptA.y, ptB.y);
-		while (ptC.y <= MAX(ptB.y, ptA.y))
+		c.y = MIN(a.y, b.y) - 1;
+		while (++c.y <= MAX(b.y, a.y))
 		{
-			ptC.x = ptA.x + (double)((double)(ptB.x - ptA.x)*((double)(ptC.y - ptA.y)/(ptB.y - ptA.y)));
-			mlx_pixel_put(env->mlx, env->win, ptC.x, ptC.y, 0x000000);
-			ptC.y++;
+			c.x = a.x + ((b.x - a.x) * ((c.y - a.y)/(b.y - a.y)));
+			mlx_pixel_put(env->mlx, env->win, c.x, c.y, 0x000000);
 		}	
 	}
 	else
 	{
-		ptC.y = 0;
-		ptC.x = MIN(ptA.x, ptB.x);
-		while (ptC.x <= MAX(ptB.x, ptA.x))
+		c.x = MIN(a.x, b.x) - 1;
+		while (++c.x <= MAX(b.x, a.x))
 		{
-			ptC.y = ptA.y + (double)((double)(ptB.y - ptA.y)*((double)(ptC.x - ptA.x)/(ptB.x - ptA.x)));
-			mlx_pixel_put(env->mlx, env->win, ptC.x, ptC.y, 0x000000);
-			ptC.x++;
+			c.y = a.y + ((b.y - a.y) * ((c.x - a.x)/(b.x - a.x)));
+			mlx_pixel_put(env->mlx, env->win, c.x, c.y, 0x000000);
 		}
 	}
+}
+
+/*
+** Fonction qui converti une case du tableau point, avec les bons indices
+** par rapport a la taille de la fenetre.
+** Parametre indices x et y de point[][] et retour X et Y.
+*/
+
+t_point	ft_conv_point(t_map *map, int x, int y)
+{
+	t_point point;
+
+	point.x = x + ((x + 1) * ECT_PIX);
+	point.y = y + map->h_more + (ECT_PIX * y);
+	return (point);
+}
+
+int	ft_conv_ind(t_map *map, t_point a)
+{
+	int	ret;
+
+	ret = 0;
+	return (0);
 }

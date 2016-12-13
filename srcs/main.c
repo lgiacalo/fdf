@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/12 13:44:06 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/13 05:44:33 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,32 +108,7 @@ int	main(int argc, char **argv)
 	ptB.x = 1;
 	ptB.y = 2;
 
-
-	mlx_pixel_put(a->mlx, a->win, ptA.x, ptA.y, 0x000000);
-	mlx_pixel_put(a->mlx, a->win, ptB.x, ptB.y, 0x000000);
-
-	if (ABS(ptA.x - ptB.x) < ABS(ptA.y - ptB.y))
-	{
-		ptC.x = 0;
-		ptC.y = MIN(ptA.y, ptB.y);
-		while (ptC.y <= MAX(ptB.y, ptA.y))
-		{
-			ptC.x = ptA.x + (double)((double)(ptB.x - ptA.x)*((double)(ptC.y - ptA.y)/(ptB.y - ptA.y)));
-			mlx_pixel_put(a->mlx, a->win, ptC.x, ptC.y, 0x000000);
-			ptC.y++;
-		}	
-	}
-	else
-	{
-		ptC.y = 0;
-		ptC.x = MIN(ptA.x, ptB.x);
-		while (ptC.x <= MAX(ptB.x, ptA.x))
-		{
-			ptC.y = ptA.y + (double)((double)(ptB.y - ptA.y)*((double)(ptC.x - ptA.x)/(ptB.x - ptA.x)));
-			mlx_pixel_put(a->mlx, a->win, ptC.x, ptC.y, 0x000000);
-			ptC.x++;
-		}
-	}
+	ft_trait(a, ptA, ptB);
 /*
 	printf("valeur win = %p\n", a->win);
 	mlx_expose_hook(a->win, expose_hook, &a);
