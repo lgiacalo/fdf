@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/11 21:16:31 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/13 17:14:34 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	main(int argc, char **argv)
 		a->str[x] = 250;
 		x++;
 	}
-	x = 460;
+/*	x = 460;
 	while (x < 560)
 	{
 		if ((x + 1) % 4 == 0)
@@ -96,51 +96,76 @@ int	main(int argc, char **argv)
 		x++;
 	}
 
-
-	mlx_put_image_to_window(a->mlx, a->win, a->img, 50, 50);
-
-	t_point ptA;
+*/	t_point ptA;
 	t_point ptB;
 	t_point ptC;
 
+
+//	ptA = ft_conv_point(b, a, 0, 0);
+//	ptB = ft_conv_point(b, a, 1, 0);
+//	ft_trait(b, a, ptA, ptB);
+
+	
+	ft_grillage(b, a);
+
+/*	y = -1;
+	while (++y < b->line)
+	{
+		x = -1;
+		while (++x < b->col - 1)
+		{
+			ptA = ft_conv_point(b, a, x, y);
+			ptB = ft_conv_point(b, a, (x + 1), y);
+			ft_trait(b, a, ptA, ptB);
+		}
+	}
+	y = -1;
+	while (++y < b->line - 1)
+	{
+		x = -1;
+		while (++x < b->col)
+		{
+			ptA = ft_conv_point(b, a, x, y);
+			ptB = ft_conv_point(b, a, x, y + 1);
+			ft_trait(b, a, ptA, ptB);
+		}
+	}
+
+*/
+
+
+/*	printf("\nje suis la\n\n");
+	y = 0;
+	while (y < b->line - 1)
+	{
+		x = 0;
+		printf("LIGNE %d :\n", x);
+		while (x < b->col - 1)
+		{
+			printf("COLONNE %d :\n", y);
+			ptA = ft_conv_point(b, a, x, y);
+			ptB = ft_conv_point(b, a, (x + 1), y);
+			ft_trait(b, a, ptA, ptB);
+			ptA = ft_conv_point(b, a, x, y);
+			ptB = ft_conv_point(b, a, x, y + 1);
+			ft_trait(b, a, ptA, ptB);
+			x++;
+		}
+		ptA = ft_conv_point(b, a, x, y);
+		ptB = ft_conv_point(b, a, x, y + 1);
+		ft_trait(b, a, ptA, ptB);
+		y++;
+	}
+*/
+
+	mlx_put_image_to_window(a->mlx, a->win, a->img, 50, 50);
+
 	ptA.x = 185;
-	ptA.y = 65;
+	ptA.y = 45;
 	ptB.x = 1;
 	ptB.y = 2;
 
-
-	mlx_pixel_put(a->mlx, a->win, ptA.x, ptA.y, 0x000000);
-	mlx_pixel_put(a->mlx, a->win, ptB.x, ptB.y, 0x000000);
-
-	printf("valeur point A avant condition swap : (%d,%d)\n", ptA.x, ptA.y);
-	printf("valeur point B avant condition swap: (%d,%d)\n", ptB.x, ptB.y);
-	
-	if (ABS(ptA.x - ptB.x) < ABS(ptA.y - ptB.y))
-	{
-		ptC.x = 0;
-		ptC.y = MIN(ptA.y, ptB.y);
-		while (ptC.y <= MAX(ptB.y, ptA.y))
-		{
-//			printf("valeur point C dans le while : (%d,%d)\n", ptC.x, ptC.y);
-			ptC.x = ptA.x + (double)((double)(ptB.x - ptA.x)*((double)(ptC.y - ptA.y)/(ptB.y - ptA.y)));
-			mlx_pixel_put(a->mlx, a->win, ptC.x, ptC.y, 0x000000);
-			ptC.y++;
-		}	
-		printf("je suis passee par le swap !!\nDonc un pixel par ligne\n");
-	}
-	else
-	{
-		ptC.y = 0;
-		ptC.x = MIN(ptA.x, ptB.x);
-		while (ptC.x <= MAX(ptB.x, ptA.x))
-		{
-//			printf("valeur point C dans le while : (%d,%d)\n", ptC.x, ptC.y);
-			ptC.y = ptA.y + (double)((double)(ptB.y - ptA.y)*((double)(ptC.x - ptA.x)/(ptB.x - ptA.x)));
-			mlx_pixel_put(a->mlx, a->win, ptC.x, ptC.y, 0x000000);
-			ptC.x++;
-		}
-		printf("pas de swap !!\nDonc un pixel par colonne\n");
-	}
+//	ft_trait(a, ptA, ptB);
 /*
 	printf("valeur win = %p\n", a->win);
 	mlx_expose_hook(a->win, expose_hook, &a);

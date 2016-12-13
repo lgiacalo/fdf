@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 03:07:04 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/13 05:44:37 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/13 17:03:06 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ static int		ft_digit(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] != ' ' && !(ft_isdigit(str[i])))
-			return (0);
+	//	if (str[i] != ' ' && !(ft_isdigit(str[i])))
+	//		return (0);
 		i++;
 	}
 	return (1);
@@ -120,7 +120,6 @@ void	ft_affichage(t_env *env, t_map *map)
 
 
 	x = 0;
-	y = 0;
 	while (x < map->line)
 	{
 		y = 0;

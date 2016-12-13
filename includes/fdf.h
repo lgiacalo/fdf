@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:42:12 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/13 05:44:38 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/13 17:16:18 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ typedef struct	s_env
 
 int		ft_read_file(char *tab, t_env *env, t_map *map);
 void		ft_remplissage(t_env *env, t_map *map);
-void		ft_trait(t_env *env, t_point a, t_point b);
+void		ft_trait(t_map *map, t_env *env, t_point a, t_point b);
+t_point		ft_conv_point(t_map *map, t_env *env, int x, int y);
+int		ft_conv_ind(t_map *map, t_env *env, t_point a);
+void		ft_color_pixel(t_map *map, t_env *env, int ret);
+void		ft_grillage(t_map *map, t_env *env);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/13 05:44:33 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/13 17:16:10 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	main(int argc, char **argv)
 		a->str[x] = 250;
 		x++;
 	}
-	x = 460;
+/*	x = 460;
 	while (x < 560)
 	{
 		if ((x + 1) % 4 == 0)
@@ -95,20 +95,11 @@ int	main(int argc, char **argv)
 		a->str[x] = 0;
 		x++;
 	}
+*/
 
+	ft_grillage(b, a);
 
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 50, 50);
-
-	t_point ptA;
-	t_point ptB;
-	t_point ptC;
-
-	ptA.x = 185;
-	ptA.y = 65;
-	ptB.x = 1;
-	ptB.y = 2;
-
-	ft_trait(a, ptA, ptB);
 /*
 	printf("valeur win = %p\n", a->win);
 	mlx_expose_hook(a->win, expose_hook, &a);
