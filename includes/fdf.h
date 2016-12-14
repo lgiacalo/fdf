@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:42:12 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/13 17:16:18 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/14 01:46:08 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,9 @@ typedef struct	s_point
 {
 	double	x;
 	double	y;
+	double	z;
+	int		color;
 }		t_point;
-
-typedef struct	s_map
-{
-	int	**point;
-	int	line;
-	int	col;
-	int	ecart_case;
-	int	h_more;
-}		t_map;
 
 typedef struct	s_env
 {
@@ -48,19 +41,24 @@ typedef struct	s_env
 	t_point	len_win;
 	void	*img;
 	t_point	len_img;
-	int	bit_per_pixel;
-	int	img_ptr;
-	int	endian;
+	int		bit_per_pixel;
+	int		img_ptr;
+	int		endian;
 	char	*str;
-	int	len_str;
+	int		len_str;
+	int		**point;
+	int		line;
+	int		col;
+	int		ecart_case;
+	int		h_more;
 }		t_env;
 
-int		ft_read_file(char *tab, t_env *env, t_map *map);
-void		ft_remplissage(t_env *env, t_map *map);
-void		ft_trait(t_map *map, t_env *env, t_point a, t_point b);
-t_point		ft_conv_point(t_map *map, t_env *env, int x, int y);
-int		ft_conv_ind(t_map *map, t_env *env, t_point a);
-void		ft_color_pixel(t_map *map, t_env *env, int ret);
-void		ft_grillage(t_map *map, t_env *env);
+int		ft_read_file(char *tab, t_env *env);
+void		ft_remplissage(t_env *env);
+void		ft_trait(t_env *env, t_point a, t_point b);
+t_point		ft_conv_point(t_env *env, int x, int y);
+int		ft_conv_ind(t_env *env, t_point a);
+void		ft_color_pixel(t_env *env, int ret);
+void		ft_grillage(t_env *env);
 
 #endif

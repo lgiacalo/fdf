@@ -6,49 +6,49 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 03:07:04 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/13 17:03:06 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/14 01:55:31 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 #include <stdio.h>
 
-void	ft_affichage(t_env *env, t_map *map);
+void		ft_affichage(t_env *env);
 
-static int	*ft_space(char *str, t_map *map)
+static int	*ft_space(char *str, t_env *env)
 {
-	int	*new;
+	int		*new;
 	char	**split;
-	int	len;
+	int		len;
 
-	map->col = ft_nbwords(str, ' ');
-	if (!(new = (int*)malloc(sizeof(int) * (map->col))))
+	env->col = ft_nbwords(str, ' ');
+	if (!(new = (int*)malloc(sizeof(int) * (env->col))))
 		return (NULL);
 	len = -1;
 	split = ft_strsplit((char const*)str, ' ');
-	while (++len < map->col)
+	while (++len < env->col)
 		new[len] = ft_atoi(split[len]);
 	len = -1;
-	while (++len < map->col)
+	while (++len < env->col)
 		free(split[len]);
 	return (new);
 }
 
-static int	ft_display_file(char *tab, t_env *env, t_map *map)
+static int	ft_display_file(char *tab, t_env *env)
 {
-	int	fd;
-	int	i;
+	int		fd;
+	int		i;
 	char	*temp1;
 
-	if (!(map->point = (int**)malloc(sizeof(int*) * (map->line + 1))))
+	if (!(env->point = (int**)malloc(sizeof(int*) * (env->line + 1))))
 		return (-1);
-	map->point[map->line] = 0;
+	env->point[env->line] = 0;
 	i = 0;
 	if ((fd = open(tab, O_RDONLY)) == -1)
 		return (-1);
 	while (get_next_line(fd, &temp1) == 1)
 	{
-		if (!(map->point[i] = ft_space(temp1, map)))
+		if (!(env->point[i] = ft_space(temp1, env)))
 			return (-1);
 		free(temp1);
 		i++;
@@ -58,21 +58,7 @@ static int	ft_display_file(char *tab, t_env *env, t_map *map)
 	return (0);
 }
 
-static int		ft_digit(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-	//	if (str[i] != ' ' && !(ft_isdigit(str[i])))
-	//		return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	ft_read_file(char *tab, t_env *env, t_map *map)
+int			ft_read_file(char *tab, t_env *env)
 {
 	int		fd;
 	int		i;
@@ -83,25 +69,20 @@ int	ft_read_file(char *tab, t_env *env, t_map *map)
 	i = 0;
 	while (get_next_line(fd, &temp2) == 1)
 	{
-		if (!(ft_digit(temp2)))
-		{
-			free(temp2);
-			return (-1);
-		}
 		free(temp2);
 		i++;
 	}
 	if ((i <= 0) || (close(fd) == -1))
 		return (-1);
-	map->line = i;
-	if ((ft_display_file(tab, env, map) == -1))
+	env->line = i;
+	if ((ft_display_file(tab, env) == -1))
 		return (-1);
-	ft_remplissage(env, map);
-	ft_affichage(env, map);
+	ft_remplissage(env);
+	ft_affichage(env);
 	return (0);
 }
 
-void	ft_affichage(t_env *env, t_map *map)
+void		ft_affichage(t_env *env)
 {
 	int	x, y;
 
@@ -111,22 +92,22 @@ void	ft_affichage(t_env *env, t_map *map)
 	printf("\tTAILLE IMAGE\n");
 	printf("VALEUR X : %f\t/\t", env->len_img.x);
 	printf("VALEUR Y : %f\n\n", env->len_img.y);
-	printf("Nombre de colonne : %d\n", map->col);
-	printf("Nombre de ligne : %d\n\n", map->line);
-	printf("Ecart entre les points : %d pixels, soit %d\n", ECT_PIX, map->ecart_case);
+	printf("Nombre de colonne : %d\n", env->col);
+	printf("Nombre de ligne : %d\n\n", env->line);
+	printf("Ecart entre les points : %d pixels, soit %d\n", ECT_PIX, env->ecart_case);
 	printf("Longueur d'une ligne : %d\n", env->img_ptr);
 	printf("Longeur de toutes les lignes : %d\n", env->len_str);
-	printf("Nombre de ligne en plus (en bas et en haut) : %d\n\n", map->h_more);
+	printf("Nombre de ligne en plus (en bas et en haut) : %d\n\n", env->h_more);
 
 
 	x = 0;
-	while (x < map->line)
+	while (x < env->line)
 	{
 		y = 0;
-		while (y < map->col)
+		while (y < env->col)
 		{
-			printf("%d", map->point[x][y]);
-			if (map->point[x][y] < 10)
+			printf("%d", env->point[x][y]);
+			if (env->point[x][y] < 10)
 				printf(" ");
 			printf(" ");
 			y++;

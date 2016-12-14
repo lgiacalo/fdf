@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/13 17:16:10 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/14 01:47:03 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,11 @@ int	expose_hook(t_env *env)
 int	main(int argc, char **argv)
 {
 	t_env	*a;
-	t_map	*b;
 	int		x, y, ret;
 
 	a = (t_env*)malloc(sizeof(t_env) * 1);
-	b = (t_map*)malloc(sizeof(t_map) * 1);
 
-	ret = ft_read_file(argv[1], a, b);
+	ret = ft_read_file(argv[1], a);
 	if (ret == -1)
 		return (-1);
 
@@ -97,7 +95,7 @@ int	main(int argc, char **argv)
 	}
 */
 
-	ft_grillage(b, a);
+	ft_grillage(a);
 
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 50, 50);
 /*

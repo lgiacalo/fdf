@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/09 02:48:41 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/14 01:47:03 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,126 +48,41 @@ int	expose_hook(t_env *env)
 	return (0);
 }
 
-int	ft_display_file(t_file **list, t_map *map)
-{
-	t_file	*temp1;
-	t_file	*temp2;
-	int		i;
-
-	*list = temp1;
-	
-	printf("longeur list = nbr de ligne : %d\n", map->line);
-	if ((map->point = (char**)malloc(sizeof(char*) * (map->line + 1))) == NULL)
-		return (-1);
-	write(1, "555\n", 4);
-	map->point[map->line] = 0;
-	write(1, "555\n", 4);
-	i = 0;
-	while (temp1)
-	{
-		printf("valeur pointeur next : %p\n", temp1->next);
-		printf("valeur pointeur next : %p\n", (temp1->next)->next);
-		map->point[i] = (temp1->str);
-		i++;
-		temp2 = temp1;
-		temp1 = temp1->next;
-	//	free(temp2);
-	}
-	printf("valeur de i : %d\n", i);
-	return (0);
-	write(1, "666\n", 4);
-	map->col = ft_strlen(map->point[0]);
-	write(1, "777\n", 4);
-	ft_print_words_tables(map->point);
-	write(1, "888\n", 4);
-
-	return (0);
-}
-
-
-
-int	ft_read_file(char *tab, t_env *env, t_map *map)
-{
-	int		fd;
-	t_file	*debut;
-	t_file	*list;
-	char	*temp;
-
-	if ((fd = open(tab, O_RDONLY)) == -1)
-			return (-1);
-	write(1, "111\n", 4);
-	while (get_next_line(fd, &temp) == 1)
-	{
-		printf("buff : %s\t longeur chaine : %zu\n", temp, ft_strlen(temp));
-		list = (t_file*)malloc(sizeof(t_file) * 1);
-		list->str = temp;
-		printf("valeur : %s\n", (list->str));
-		ft_lstadd_end((t_list**)(&debut), (t_list*)list);
-		printf("first ligne : %s\n", (debut->str));
-	}
-	list = debut;
-	map->line = (int)ft_lstsize((t_list*)list);
-	printf("longeur list = nbr de ligne : %d\n", map->line);
-	printf("valeur premiere ligne : %s\n", (debut->str));
-	write(1, "222\n", 4);
-	if (close(fd) == -1)
-		return (-1);
-	write(1, "333\n", 4);
-	if (ft_display_file(&debut, map) == -1)
-		return (-1);
-	write(1, "999\n", 4);
-	return (0);
-}
-
-
-
 int	main(int argc, char **argv)
 {
 	t_env	*a;
-	t_map	*b;
-	int		x, ret;
+	int		x, y, ret;
 
 	a = (t_env*)malloc(sizeof(t_env) * 1);
-	b = (t_map*)malloc(sizeof(t_map) * 1);
 
-	ret = ft_read_file(argv[1], a, b);
+	ret = ft_read_file(argv[1], a);
 	if (ret == -1)
 		return (-1);
 
-	a->bit_per_pixel = BIT_PER_PIXEL;
-	a->img_ptr = 2400; // 4*nbr colonne
-	a->endian = ENDIAN;
-	a->len_chaine = 1440000;
-
-	if ((a->mlx = mlx_init(0)) == NULL)
+	if (!(a->mlx = mlx_init(0)))
 		return (EXIT_FAILURE);
-	if ((a->img = mlx_new_image(a->mlx, 600, 600)) == NULL)
+	if (!(a->img = mlx_new_image(a->mlx, a->len_img.x, a->len_img.y)))
 		return (EXIT_FAILURE);
-	if ((a->chaine = mlx_get_data_addr(a->img, &(a->bit_per_pixel), &(a->img_ptr), &(a->endian))) == NULL)
+	if (!(a->str = mlx_get_data_addr(a->img, &(a->bit_per_pixel), &(a->img_ptr), &(a->endian))))
 		return (EXIT_FAILURE);
-	write(1, "5merde\n", 7);
-
+	if (!(a->win = mlx_new_window(a->mlx, a->len_win.x, a->len_win.y, "FDF")))
+		return (EXIT_FAILURE);
 
 	x = 0;
-	printf("valeur en int de la couleur rouge : %d\n", mlx_get_color_value(a->mlx, 0xFF0000));
-	printf("valeur en int de la couleur blanc : %d\n", mlx_get_color_value(a->mlx, 0xFFFFFF));
-	printf("valeur en int de la couleur bleu : %d\n", mlx_get_color_value(a->mlx, 0x0000FF));
-	a->win = mlx_new_window(a->mlx, 800, 800, "MECHANT !!!!");
 	draw(a->mlx, a->win);
-	printf("ecart entre les points en octet : %d\n", ECART_PT);
-	while (x < a->len_chaine)
+	while (x < a->len_str)
 	{
 		if ((x + 1) % 4 == 0)
 			x++;
-		a->chaine[x] = 250;
+		a->str[x] = 250;
 		x++;
 	}
-	x = 460;
+/*	x = 460;
 	while (x < 560)
 	{
 		if ((x + 1) % 4 == 0)
 			x++;
-		a->chaine[x] = 0;
+		a->str[x] = 0;
 		x++;
 	}
 	x = 460 + 2 * a->img_ptr;
@@ -175,59 +90,16 @@ int	main(int argc, char **argv)
 	{
 		if ((x + 1) % 4 == 0)
 			x++;
-		a->chaine[x] = 0;
+		a->str[x] = 0;
 		x++;
 	}
+*/
 
+	ft_grillage(a);
 
-	mlx_put_image_to_window(a->mlx, a->win, a->img, 100, 100);
-
-	printf("valeur chaine = %p\n", a->chaine);
-
-	t_point ptA;
-	t_point ptB;
-	t_point ptC;
-
-	ptA.x = 185;
-	ptA.y = 65;
-	ptB.x = 1;
-	ptB.y = 2;
-
-
-	mlx_pixel_put(a->mlx, a->win, ptA.x, ptA.y, 0x000000);
-	mlx_pixel_put(a->mlx, a->win, ptB.x, ptB.y, 0x000000);
-
-	printf("valeur point A avant condition swap : (%d,%d)\n", ptA.x, ptA.y);
-	printf("valeur point B avant condition swap: (%d,%d)\n", ptB.x, ptB.y);
-	
-	if (ABS(ptA.x - ptB.x) < ABS(ptA.y - ptB.y))
-	{
-		ptC.x = 0;
-		ptC.y = MIN(ptA.y, ptB.y);
-		while (ptC.y <= MAX(ptB.y, ptA.y))
-		{
-//			printf("valeur point C dans le while : (%d,%d)\n", ptC.x, ptC.y);
-			ptC.x = ptA.x + (double)((double)(ptB.x - ptA.x)*((double)(ptC.y - ptA.y)/(ptB.y - ptA.y)));
-			mlx_pixel_put(a->mlx, a->win, ptC.x, ptC.y, 0x000000);
-			ptC.y++;
-		}	
-		printf("je suis passee par le swap !!\nDonc un pixel par ligne\n");
-	}
-	else
-	{
-		ptC.y = 0;
-		ptC.x = MIN(ptA.x, ptB.x);
-		while (ptC.x <= MAX(ptB.x, ptA.x))
-		{
-//			printf("valeur point C dans le while : (%d,%d)\n", ptC.x, ptC.y);
-			ptC.y = ptA.y + (double)((double)(ptB.y - ptA.y)*((double)(ptC.x - ptA.x)/(ptB.x - ptA.x)));
-			mlx_pixel_put(a->mlx, a->win, ptC.x, ptC.y, 0x000000);
-			ptC.x++;
-		}
-		printf("pas de swap !!\nDonc un pixel par colonne\n");
-	}
-
-/*	printf("valeur win = %p\n", a->win);
+	mlx_put_image_to_window(a->mlx, a->win, a->img, 50, 50);
+/*
+	printf("valeur win = %p\n", a->win);
 	mlx_expose_hook(a->win, expose_hook, &a);
 	draw(a->mlx, a->win);
 */
