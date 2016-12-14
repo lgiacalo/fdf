@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:42:12 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/14 05:41:16 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/14 23:26:08 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include "../minilibx_macos/mlx.h"
 # include "../libft/libft.h"
 # include <stdlib.h>
-# include <math.h>
 # include <fcntl.h>
 
 typedef struct	s_point
@@ -56,10 +55,7 @@ typedef struct	s_env
 
 int		ft_read_file(char *tab, t_env *env);
 void		ft_remplissage(t_env *env);
-void		ft_trait(t_env *env, t_point a, t_point b);
+void		ft_trait(t_env *env, t_point a, t_point b, char *color);
 t_point		ft_conv_point(t_env *env, int x, int y);
-int		ft_conv_ind(t_env *env, t_point a);
-void		ft_color_pixel(t_env *env, int ret);
-void		ft_grillage(t_env *env);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/14 06:39:50 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/14 23:26:03 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,48 @@ void	ft_no_leaks(t_env **a)
 	a = NULL;
 }
 
+static void	ft_grillage_line(t_env *env)
+{
+	int		x;
+	int		y;
+	char	*couleur;
+
+	y = -1;
+	while (++y < env->line)
+	{
+		x = -1;
+		while (++x < env->col - 1)
+		{
+			if (env->point[y][x].color)
+				couleur = env->point[y][x].color;
+			else
+				couleur = env->point[y][x + 1].color;
+			ft_trait(env, ft_conv_point(env, x, y), ft_conv_point(env, (x + 1), y), couleur);
+		}
+	}
+}
+
+static void	ft_grillage_col(t_env *env)
+{
+	int		x;
+	int		y;
+	char	*couleur;
+
+	y = -1;
+	while (++y < env->line - 1)
+	{
+		x = -1;
+		while (++x < env->col)
+		{
+			if (env->point[y][x].color)
+				couleur = env->point[y][x].color;
+			else
+				couleur = env->point[y + 1][x].color;
+			ft_trait(env, ft_conv_point(env, x, y),	ft_conv_point(env, x, (y + 1)), couleur);
+		}
+	}
+}
+
 int		main(int argc, char **argv)
 {
 	t_env	*a;
@@ -60,7 +102,8 @@ int		main(int argc, char **argv)
 			&(a->img_ptr), &(a->endian))) || (!(a->win = mlx_new_window(a->mlx,
 			a->len_win.x, a->len_win.y, "FDF"))))
 			return (EXIT_FAILURE);
-		ft_grillage(a);
+		ft_grillage_line(a);
+		ft_grillage_col(a);
 		mlx_put_image_to_window(a->mlx, a->win, a->img, 50, 50);
 		mlx_key_hook(a->win, my_key_funct, 0);
 		ft_no_leaks(&a);
