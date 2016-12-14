@@ -7,3 +7,8 @@
 
 # http://quentinproject.me/
 # http://dzrulz.free.fr/?op=h
+
+
+- NE PAS OUBLIER D'ENLEVER STDIO, LES PRINTF, LA FCT AFFICHAGE
+
+
