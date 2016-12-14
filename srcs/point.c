@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 00:03:24 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/14 06:26:31 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/14 17:39:47 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,28 @@ t_point	ft_conv_point(t_env *env, int x, int y)
 {
 	t_point point;
 
+
+
+/*	point.x = x + ((x + 1) * ECT_PIX) + (ISO * (env->line - y));
+	point.y = y + env->h_more + (ECT_PIX * y);
+	if (env->point[y][x].z != 0)
+	{
+		point.x = (int)(point.x - 1.5 * env->point[y][x].z);
+		point.y = (int)(point.y - (2.1) * env->point[y][x].z);
+	}
+	return (point);
+*/
 	point.x = x + ((x + 1) * ECT_PIX) + (ISO * (env->line - y));
 	point.y = y + env->h_more + (ECT_PIX * y);
 	if (env->point[y][x].z != 0)
 	{
 		point.x = (int)(point.x - 1.5 * env->point[y][x].z);
-		point.y = (int)(point.y - (3) * env->point[y][x].z);
+		point.y = (int)(point.y - (2.1) * env->point[y][x].z);
 	}
+	printf("valeur x : %d, et y : %d\t et Z = %.0f\n", x, y, env->point[y][x].z);
+	env->point[y][x].x = point.x;
+	env->point[y][x].y = point.y;
+	printf("New valeur x : %.0f, et y : %.0f\n\n", env->point[y][x].x, env->point[y][x].y);
 	return (point);
 }
 
