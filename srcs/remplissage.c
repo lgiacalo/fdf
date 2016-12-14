@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:27:34 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/14 03:38:42 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/14 04:04:15 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,13 @@ void		ft_remplissage(t_env *env)
 {
 	env->bit_per_pixel = BIT_PER_PIXEL;
 	env->endian = ENDIAN;
-	env->img_ptr = env->col * (ECART_CASE + 4) + ECART_CASE;
 	env->ecart_case = ECART_CASE;
 	env->h_more = 0;
-
 	ft_len_env(env);
-
-	env->len_str = (2 * (env->h_more * env->img_ptr) + (env->img_ptr * (env->line + ((env->line - 1) * ECT_PIX))));
-	env->len_img.x = ECT_PIX + env->col + (env->col * ECT_PIX);
+	env->len_img.x = ECT_PIX + env->col + (env->col * ECT_PIX) + (env->line * ISO);
 	env->len_img.y = (2 * env->h_more) + env->line + ((env->line - 1) * ECT_PIX);
 	env->len_win.x = env->len_img.x + 100;
 	env->len_win.y = env->len_img.y + 100;
+	env->img_ptr = env->len_img.x * 4;
+	env->len_str = env->img_ptr * env->len_img.y;
 }
