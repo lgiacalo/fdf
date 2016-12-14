@@ -6,36 +6,11 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 00:03:24 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/14 21:26:18 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/14 23:23:38 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include <stdio.h>
-
-void	ft_trait(t_env *env, t_point a, t_point b)
-{
-	t_point	c;
-
-	if (ABS(a.x - b.x) < ABS(a.y - b.y))
-	{
-		c.y = MIN(a.y, b.y) - 1;
-		while (++c.y <= MAX(b.y, a.y))
-		{
-			c.x = (int)(a.x + ((b.x - a.x) * ((c.y - a.y) / (b.y - a.y))));
-			ft_conv_ind(env, c);
-		}
-	}
-	else
-	{
-		c.x = MIN(a.x, b.x) - 1;
-		while (++c.x <= MAX(b.x, a.x))
-		{
-			c.y = (int)(a.y + ((b.y - a.y) * ((c.x - a.x) / (b.x - a.x))));
-			ft_conv_ind(env, c);
-		}
-	}
-}
 
 t_point	ft_conv_point(t_env *env, int x, int y)
 {
@@ -53,41 +28,69 @@ t_point	ft_conv_point(t_env *env, int x, int y)
 	return (point);
 }
 
-int		ft_conv_ind(t_env *env, t_point a)
+static int		ft_color(char one, char two)
+{
+	int x;
+	int y;
+	int	ret;
+
+	if (ft_isdigit(one))
+		x = one - '0';
+	else
+		x = one - 'A' + 10;
+	if (ft_isdigit(two))
+		y = two - '0';
+	else
+		y = two - 'A' + 10;
+	ret = x * 16 + y;
+	return (ret);
+}
+
+static void	ft_color_pixel(t_env *env, int ret, char *color)
+{
+	if (color)
+	{
+		env->str[ret] = ft_color(color[6], color[7]);
+		env->str[ret + 1] = ft_color(color[5], color[4]);
+		env->str[ret + 2] = ft_color(color[3], color[2]);
+	}
+	else
+	{
+		env->str[ret] = 255;
+		env->str[ret + 1] = 255;
+		env->str[ret + 2] = 255;
+	}
+}
+
+static int		ft_conv_ind(t_env *env, t_point a, char *color)
 {
 	int	ret;
 
 	ret = (a.x * 4 + (a.y * env->img_ptr));
-	ft_color_pixel(env, ret);
+	ft_color_pixel(env, ret, color);
 	return (0);
 }
 
-void	ft_color_pixel(t_env *env, int ret)
+void	ft_trait(t_env *env, t_point a, t_point b, char *color)
 {
-	env->str[ret] = 250;
-	env->str[ret + 1] = 250;
-	env->str[ret + 2] = 250;
-}
+	t_point	c;
 
-void	ft_grillage(t_env *env)
-{
-	int	x;
-	int	y;
-
-	y = -1;
-	while (++y < env->line)
+	if (ABS(a.x - b.x) < ABS(a.y - b.y))
 	{
-		x = -1;
-		while (++x < env->col - 1)
-			ft_trait(env, ft_conv_point(env, x, y),
-					ft_conv_point(env, (x + 1), y));
+		c.y = MIN(a.y, b.y) - 1;
+		while (++c.y <= MAX(b.y, a.y))
+		{
+			c.x = (int)(a.x + ((b.x - a.x) * ((c.y - a.y) / (b.y - a.y))));
+			ft_conv_ind(env, c, color);
+		}
 	}
-	y = -1;
-	while (++y < env->line - 1)
+	else
 	{
-		x = -1;
-		while (++x < env->col)
-			ft_trait(env, ft_conv_point(env, x, y),
-					ft_conv_point(env, x, (y + 1)));
+		c.x = MIN(a.x, b.x) - 1;
+		while (++c.x <= MAX(b.x, a.x))
+		{
+			c.y = (int)(a.y + ((b.y - a.y) * ((c.x - a.x) / (b.x - a.x))));
+			ft_conv_ind(env, c, color);
+		}
 	}
 }

@@ -6,13 +6,13 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 00:03:24 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/14 23:23:38 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/14 23:41:59 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-t_point	ft_conv_point(t_env *env, int x, int y)
+t_point			ft_conv_point(t_env *env, int x, int y)
 {
 	t_point point;
 
@@ -46,7 +46,7 @@ static int		ft_color(char one, char two)
 	return (ret);
 }
 
-static void	ft_color_pixel(t_env *env, int ret, char *color)
+static void		ft_color_pixel(t_env *env, int ret, char *color)
 {
 	if (color)
 	{
@@ -71,7 +71,7 @@ static int		ft_conv_ind(t_env *env, t_point a, char *color)
 	return (0);
 }
 
-void	ft_trait(t_env *env, t_point a, t_point b, char *color)
+void			ft_trait(t_env *env, t_point a, t_point b, char *color)
 {
 	t_point	c;
 

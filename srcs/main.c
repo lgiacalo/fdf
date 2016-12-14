@@ -6,24 +6,20 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/14 23:26:03 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/15 00:14:56 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include <stdio.h>
-#include <string.h>
 
-int		my_key_funct(int keycode, void *param)
+int			my_key_funct(int keycode, void *param)
 {
 	if (keycode == 53)
 		exit(0);
-	ft_putnbr(keycode);
-	write(1, "\n", 1);
 	return (0);
 }
 
-void	ft_no_leaks(t_env **a)
+void		ft_no_leaks(t_env **a)
 {
 	int	x;
 	int	y;
@@ -58,7 +54,8 @@ static void	ft_grillage_line(t_env *env)
 				couleur = env->point[y][x].color;
 			else
 				couleur = env->point[y][x + 1].color;
-			ft_trait(env, ft_conv_point(env, x, y), ft_conv_point(env, (x + 1), y), couleur);
+			ft_trait(env, ft_conv_point(env, x, y),
+					ft_conv_point(env, (x + 1), y), couleur);
 		}
 	}
 }
@@ -79,12 +76,13 @@ static void	ft_grillage_col(t_env *env)
 				couleur = env->point[y][x].color;
 			else
 				couleur = env->point[y + 1][x].color;
-			ft_trait(env, ft_conv_point(env, x, y),	ft_conv_point(env, x, (y + 1)), couleur);
+			ft_trait(env, ft_conv_point(env, x, y),
+					ft_conv_point(env, x, (y + 1)), couleur);
 		}
 	}
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_env	*a;
 	int		ret;

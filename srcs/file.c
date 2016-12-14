@@ -6,16 +6,13 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 03:07:04 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/14 23:26:01 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/14 23:40:06 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include <stdio.h>
 
-void		ft_affichage(t_env *env);
-
-static char	*ft_display_color(char *str)
+static char		*ft_display_color(char *str)
 {
 	char	*new;
 	char	**split;
@@ -55,7 +52,7 @@ static t_point	*ft_space(char *str, t_env *env, int y)
 	return (new);
 }
 
-static int	ft_display_file(char *tab, t_env *env)
+static int		ft_display_file(char *tab, t_env *env)
 {
 	int		fd;
 	int		i;
@@ -82,7 +79,7 @@ static int	ft_display_file(char *tab, t_env *env)
 	return (0);
 }
 
-int			ft_read_file(char *tab, t_env *env)
+int				ft_read_file(char *tab, t_env *env)
 {
 	int		fd;
 	int		i;
@@ -102,51 +99,5 @@ int			ft_read_file(char *tab, t_env *env)
 	if ((ft_display_file(tab, env) == -1))
 		return (-1);
 	ft_remplissage(env);
-	ft_affichage(env);
 	return (0);
-}
-
-void		ft_affichage(t_env *env)
-{
-	int	x, y;
-
-	printf("\n\tTAILLE WINDOW\n");
-	printf("VALEUR X : %f\t/\t", env->len_win.x);
-	printf("VALEUR Y : %f\n\n", env->len_win.y);
-	printf("\tTAILLE IMAGE\n");
-	printf("VALEUR X : %f\t/\t", env->len_img.x);
-	printf("VALEUR Y : %f\n\n", env->len_img.y);
-	printf("Nombre de colonne : %d\n", env->col);
-	printf("Nombre de ligne : %d\n\n", env->line);
-	printf("Ecart entre les points : %d pixels, soit %d\n", ECT_PIX, env->ecart_case);
-	printf("Longueur d'une ligne : %d\n", env->img_ptr);
-	printf("Longeur de toutes les lignes : %d\n", env->len_str);
-	printf("Nombre de ligne en plus (en bas et en haut) : %d\n\n", env->h_more);
-
-
-	x = 0;
-	while (x < env->line)
-	{
-		y = 0;
-		while (y < env->col)
-		{
-			printf("%.0f", env->point[x][y].z);
-		//	printf(" %.0f", env->point[x][y].x);
-		//	printf(" %.0f", env->point[x][y].y);
-			if (env->point[x][y].color)
-				printf(",%s", env->point[x][y].color);
-			if (env->point[x][y].z < 10)
-				printf(" ");
-			printf(" ");
-			y++;
-		}
-		printf("\n");
-		x++;
-	}
-	printf("\n");
-	printf("\tCOULEURS\n");
-
-	printf("Valeur en int de la couleur rouge : %d\n", mlx_get_color_value(env->mlx, 0xFF0000));
-	printf("Valeur en int de la couleur blanc : %d\n", mlx_get_color_value(env->mlx, 0xFFFFFF));
-	printf("Valeur en int de la couleur bleu : %d\n\n", mlx_get_color_value(env->mlx, 0x0000FF));
 }
