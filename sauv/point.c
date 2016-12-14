@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 00:03:24 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/14 06:26:31 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/14 06:14:24 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ void	ft_trait(t_env *env, t_point a, t_point b)
 	}
 }
 
+/*
+** Fonction qui converti une case du tableau point, avec les bons indices
+** par rapport a la taille de la fenetre.
+** Parametre indices x et y de point[][] et retour X et Y.
+*/
+
 t_point	ft_conv_point(t_env *env, int x, int y)
 {
 	t_point point;
@@ -54,7 +60,6 @@ t_point	ft_conv_point(t_env *env, int x, int y)
 int		ft_conv_ind(t_env *env, t_point a)
 {
 	int	ret;
-
 	ret = (a.x * 4 + (a.y * env->img_ptr));
 	ft_color_pixel(env, ret);
 	return (0);
@@ -62,9 +67,9 @@ int		ft_conv_ind(t_env *env, t_point a)
 
 void	ft_color_pixel(t_env *env, int ret)
 {
-	env->str[ret] = 250;
-	env->str[ret + 1] = 250;
-	env->str[ret + 2] = 250;
+	env->str[ret] = 0;
+	env->str[ret + 1] = 0;
+	env->str[ret + 2] = 0;
 }
 
 void	ft_grillage(t_env *env)
@@ -77,15 +82,14 @@ void	ft_grillage(t_env *env)
 	{
 		x = -1;
 		while (++x < env->col - 1)
-			ft_trait(env, ft_conv_point(env, x, y),
-					ft_conv_point(env, (x + 1), y));
+			ft_trait(env, ft_conv_point(env, x, y), ft_conv_point(env, (x + 1), y));
 	}
 	y = -1;
+
 	while (++y < env->line - 1)
 	{
 		x = -1;
 		while (++x < env->col)
-			ft_trait(env, ft_conv_point(env, x, y),
-					ft_conv_point(env, x, (y + 1)));
+			ft_trait(env, ft_conv_point(env, x, y),	ft_conv_point(env, x, (y + 1)));
 	}
 }
