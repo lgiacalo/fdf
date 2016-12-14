@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 03:07:04 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/14 01:55:31 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/14 02:35:00 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,39 @@
 
 void		ft_affichage(t_env *env);
 
-static int	*ft_space(char *str, t_env *env)
+static char	*ft_display_color(char *str)
 {
-	int		*new;
+	char	*new;
+	char	**split;
+
+	split = ft_strsplit((char const*)str, ',');
+	new = ft_strdup(split[1]);
+	free(split[0]);
+	free(split[1]);
+	return (new);
+}
+
+static t_point	*ft_space(char *str, t_env *env, int y)
+{
+	t_point	*new;
 	char	**split;
 	int		len;
 
 	env->col = ft_nbwords(str, ' ');
-	if (!(new = (int*)malloc(sizeof(int) * (env->col))))
+	if (!(new = (t_point*)malloc(sizeof(t_point) * (env->col))))
 		return (NULL);
 	len = -1;
 	split = ft_strsplit((char const*)str, ' ');
 	while (++len < env->col)
-		new[len] = ft_atoi(split[len]);
+	{
+		new[len].x = len;
+		new[len].y = y;
+		new[len].z = ft_atoi(split[len]);
+		if (!(ft_strdigit(split[len])))
+			new[len].color = ft_display_color(split[len]);
+		else
+			new[len].color = NULL;
+	}
 	len = -1;
 	while (++len < env->col)
 		free(split[len]);
@@ -40,7 +60,7 @@ static int	ft_display_file(char *tab, t_env *env)
 	int		i;
 	char	*temp1;
 
-	if (!(env->point = (int**)malloc(sizeof(int*) * (env->line + 1))))
+	if (!(env->point = (t_point**)malloc(sizeof(t_point*) * (env->line + 1))))
 		return (-1);
 	env->point[env->line] = 0;
 	i = 0;
@@ -48,7 +68,7 @@ static int	ft_display_file(char *tab, t_env *env)
 		return (-1);
 	while (get_next_line(fd, &temp1) == 1)
 	{
-		if (!(env->point[i] = ft_space(temp1, env)))
+		if (!(env->point[i] = ft_space(temp1, env, i)))
 			return (-1);
 		free(temp1);
 		i++;
@@ -106,8 +126,12 @@ void		ft_affichage(t_env *env)
 		y = 0;
 		while (y < env->col)
 		{
-			printf("%d", env->point[x][y]);
-			if (env->point[x][y] < 10)
+			printf("%.0f", env->point[x][y].z);
+		//	printf(" %.0f", env->point[x][y].x);
+		//	printf(" %.0f", env->point[x][y].y);
+			if (env->point[x][y].color)
+				printf(",%s", env->point[x][y].color);
+			if (env->point[x][y].z < 10)
 				printf(" ");
 			printf(" ");
 			y++;

@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:27:34 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/14 01:50:54 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/14 02:18:09 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static void	ft_len_env(t_env *env)
 		y = -1;
 		h = 0;
 		while (++y < env->col)
-			if (ABS(h) < ABS(env->point[x][y]))
-				h = ABS(env->point[x][y]);
+			if (ABS(h) < ABS(env->point[x][y].z))
+				h = ABS(env->point[x][y].z);
 		if (h > (MIN(x, (env->line - x)) * ECT_PIX / 3))
 			if (env->h_more < (h - MIN(x, (env->line - x))
 				* ECT_PIX / 3))

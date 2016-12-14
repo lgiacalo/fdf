@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:42:12 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/14 02:10:43 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/14 01:46:08 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct	s_point
 	double	x;
 	double	y;
 	double	z;
-	char	*color;
+	int		color;
 }		t_point;
 
 typedef struct	s_env
@@ -46,7 +46,7 @@ typedef struct	s_env
 	int		endian;
 	char	*str;
 	int		len_str;
-	t_point	**point;
+	int		**point;
 	int		line;
 	int		col;
 	int		ecart_case;
