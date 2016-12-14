@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/14 01:47:03 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/14 03:51:21 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,22 @@ int	main(int argc, char **argv)
 	draw(a->mlx, a->win);
 */
 	mlx_key_hook(a->win, my_key_funct, 0);
+
+	x = 0;
+	while (x < a->line)
+	{
+		y = 0;
+		while (y < a->col)
+		{
+			if (a->point[x][y].color)
+				free(a->point[x][y].color);
+			y++;
+		}
+		free(a->point[x]);
+		x++;
+	}
+	free(a->point);
+	free(a);
 
 	mlx_loop(a->mlx);
 	return (0);

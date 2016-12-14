@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:42:12 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/14 02:10:43 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/14 03:52:26 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define ECT_PIX 30
 # define ENDIAN 1
 # define ECART_CASE (4 * ECT_PIX)
+# define ISO 10
 # define MIN(x, y) ((x < y) ? (x) : (y))
 # define MAX(x, y) ((x < y) ? (y) : (x))
 

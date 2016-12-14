@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 03:07:04 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/14 02:35:00 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/14 03:10:41 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static char	*ft_display_color(char *str)
 	char	**split;
 
 	split = ft_strsplit((char const*)str, ',');
-	new = ft_strdup(split[1]);
+	new = split[1];
 	free(split[0]);
-	free(split[1]);
+	free(split);
 	return (new);
 }
 
@@ -51,6 +51,7 @@ static t_point	*ft_space(char *str, t_env *env, int y)
 	len = -1;
 	while (++len < env->col)
 		free(split[len]);
+	free(split);
 	return (new);
 }
 
@@ -69,7 +70,10 @@ static int	ft_display_file(char *tab, t_env *env)
 	while (get_next_line(fd, &temp1) == 1)
 	{
 		if (!(env->point[i] = ft_space(temp1, env, i)))
+		{
+			free(temp1);
 			return (-1);
+		}
 		free(temp1);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:27:34 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/14 02:18:09 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/14 03:38:42 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	ft_len_env(t_env *env)
 				env->h_more = h - MIN(x, (env->line - x))
 				* ECT_PIX / 3;
 	}
+	env->h_more *= 3;
 }
 
 void		ft_remplissage(t_env *env)
@@ -42,12 +43,12 @@ void		ft_remplissage(t_env *env)
 	env->img_ptr = env->col * (ECART_CASE + 4) + ECART_CASE;
 	env->ecart_case = ECART_CASE;
 	env->h_more = 0;
+
 	ft_len_env(env);
-	env->len_str = (2 * (env->h_more * env->img_ptr) +
-	(env->img_ptr * (env->line + ((env->line - 1) * ECT_PIX))));
+
+	env->len_str = (2 * (env->h_more * env->img_ptr) + (env->img_ptr * (env->line + ((env->line - 1) * ECT_PIX))));
 	env->len_img.x = ECT_PIX + env->col + (env->col * ECT_PIX);
-	env->len_img.y = (2 * env->h_more) + env->line +
-	((env->line - 1) * ECT_PIX);
+	env->len_img.y = (2 * env->h_more) + env->line + ((env->line - 1) * ECT_PIX);
 	env->len_win.x = env->len_img.x + 100;
 	env->len_win.y = env->len_img.y + 100;
 }
