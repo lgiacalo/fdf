@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:42:12 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/15 06:16:19 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/15 06:33:01 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FDF_H
 
 # define BIT_PER_PIXEL 32
-# define ECT_PIX 20
+# define ECT_PIX 10
 # define ENDIAN 1
 # define ISO (ECT_PIX / 3)
 # define MIN(x, y) ((x < y) ? (x) : (y))

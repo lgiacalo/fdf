@@ -6,11 +6,12 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:27:34 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/15 06:16:38 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/15 06:33:03 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include <stdio.h>
 
 char		*ft_cpy_mod(char *src)
 {
@@ -64,6 +65,7 @@ void		ft_remplissage(t_env *env)
 {
 	env->bit_per_pixel = BIT_PER_PIXEL;
 	env->endian = ENDIAN;
+//	env->ect_pix = env->line;
 	env->ect_pix = ECT_PIX;
 	env->ecart_case = env->ect_pix * 4;
 	env->h_more = 0;
