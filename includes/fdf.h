@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:42:12 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/15 05:46:17 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/15 06:16:19 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 # define FDF_H
 
 # define BIT_PER_PIXEL 32
-# define ECT_PIX 30
+# define ECT_PIX 20
 # define ENDIAN 1
-# define ECART_CASE (4 * ECT_PIX)
-# define ISO 10
+# define ISO (ECT_PIX / 3)
 # define MIN(x, y) ((x < y) ? (x) : (y))
 # define MAX(x, y) ((x < y) ? (y) : (x))
 
@@ -49,6 +48,7 @@ typedef struct	s_env
 	t_point		**point;
 	int			line;
 	int			col;
+	int			ect_pix;
 	int			ecart_case;
 	int			h_more;
 }				t_env;
