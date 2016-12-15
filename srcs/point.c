@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 00:03:24 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/14 23:41:59 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/15 05:42:38 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static int		ft_color(char one, char two)
 	int y;
 	int	ret;
 
+	ft_toupper(one);
+	ft_toupper(two);
 	if (ft_isdigit(one))
 		x = one - '0';
 	else

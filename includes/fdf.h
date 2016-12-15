@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:42:12 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/14 23:43:52 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/15 05:46:17 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ int				ft_read_file(char *tab, t_env *env);
 void			ft_remplissage(t_env *env);
 void			ft_trait(t_env *env, t_point a, t_point b, char *color);
 t_point			ft_conv_point(t_env *env, int x, int y);
+char			*ft_cpy_mod(char *src);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/15 00:14:56 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/15 05:51:19 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	ft_grillage_line(t_env *env)
 {
 	int		x;
 	int		y;
-	char	*couleur;
+	char	*coleur;
 
 	y = -1;
 	while (++y < env->line)
@@ -51,11 +51,13 @@ static void	ft_grillage_line(t_env *env)
 		while (++x < env->col - 1)
 		{
 			if (env->point[y][x].color)
-				couleur = env->point[y][x].color;
+				coleur = ft_cpy_mod(env->point[y][x].color);
 			else
-				couleur = env->point[y][x + 1].color;
+				coleur = ft_cpy_mod(env->point[y][x + 1].color);
 			ft_trait(env, ft_conv_point(env, x, y),
-					ft_conv_point(env, (x + 1), y), couleur);
+					ft_conv_point(env, (x + 1), y), coleur);
+			if (coleur)
+				free(coleur);
 		}
 	}
 }
@@ -64,7 +66,7 @@ static void	ft_grillage_col(t_env *env)
 {
 	int		x;
 	int		y;
-	char	*couleur;
+	char	*coleur;
 
 	y = -1;
 	while (++y < env->line - 1)
@@ -73,11 +75,13 @@ static void	ft_grillage_col(t_env *env)
 		while (++x < env->col)
 		{
 			if (env->point[y][x].color)
-				couleur = env->point[y][x].color;
+				coleur = ft_cpy_mod(env->point[y][x].color);
 			else
-				couleur = env->point[y + 1][x].color;
+				coleur = ft_cpy_mod(env->point[y + 1][x].color);
 			ft_trait(env, ft_conv_point(env, x, y),
-					ft_conv_point(env, x, (y + 1)), couleur);
+					ft_conv_point(env, x, (y + 1)), coleur);
+			if (coleur)
+				free(coleur);
 		}
 	}
 }
@@ -102,6 +106,32 @@ int			main(int argc, char **argv)
 			return (EXIT_FAILURE);
 		ft_grillage_line(a);
 		ft_grillage_col(a);
+
+		
+
+		int x = 0, y = 0;
+	
+		x  = a->img_ptr;
+
+		while (x < (3 * a->img_ptr))
+		{
+			a->str[x] = 255;
+			a->str[x + 1] = 0;
+		//	a->str[x + 2] = 255;
+			x += 4;
+		}
+//		a->str[ret] = 255;
+//		a->str[ret + 1] = 255;
+//		a->str[ret + 2] = 255;
+
+
+
+
+
+
+
+
+
 		mlx_put_image_to_window(a->mlx, a->win, a->img, 50, 50);
 		mlx_key_hook(a->win, my_key_funct, 0);
 		ft_no_leaks(&a);
