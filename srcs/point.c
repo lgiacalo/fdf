@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 00:03:24 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/15 19:54:54 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/16 17:51:46 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,25 @@ static int		ft_color(char one, char two)
 
 static void		ft_color_pixel(t_env *env, int ret, char *color)
 {
+	int i, k;
+
+	i = 2;
+	k = 2;
 	if (color)
 	{
-		env->str[ret] = ft_color(color[6], color[7]);
-		env->str[ret + 1] = ft_color(color[5], color[4]);
-		env->str[ret + 2] = ft_color(color[3], color[2]);
+		while (color[i] != '\0')
+		{
+			env->str[ret + k] = ft_color(color[i + 1], color[i]);
+			i +=2;
+			k--;
+		}
+		if (k == 1)
+		{
+			env->str[ret] = 0;
+			env->str[ret + 1] = 0;
+		}
+		else
+			env->str[ret] = 0;
 	}
 	else
 	{

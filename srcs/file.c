@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 03:07:04 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/15 06:21:49 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/16 17:54:09 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ static t_point	*ft_space(char *str, t_env *env, int y)
 		new[len].x = len;
 		new[len].y = y;
 		new[len].z = ft_atoi(split[len]);
-		if (!(ft_strdigit(split[len])))
-			new[len].color = ft_display_color(split[len]);
-		else
-			new[len].color = NULL;
+//		if (!(ft_strdigit(split[len])))
+//			new[len].color = ft_display_color(split[len]);
+//		else
+//			new[len].color = NULL;
+		new[len].color = NULL;
 	}
 	len = -1;
 	while (++len < env->col)
