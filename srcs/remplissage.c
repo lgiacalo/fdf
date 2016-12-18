@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:27:34 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/16 17:51:56 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/18 03:25:06 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void		ft_remplissage(t_env *env)
 	env->h_more = 0;
 	ft_len_env(env);
 	env->len_img.x = env->ect_pix + env->col + (env->col * env->ect_pix) +
-		(env->line * ISO) + (env->h_more);
+		(env->line * ISO) + (2 * env->h_more);
 	env->len_img.y = (2 * env->h_more) + env->line +
 		((env->line - 1) * env->ect_pix);
 	env->len_win.x = env->len_img.x + 100;
