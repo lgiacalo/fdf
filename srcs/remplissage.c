@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:27:34 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/18 03:25:06 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/19 02:08:49 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void		ft_remplissage(t_env *env)
 {
 	env->bit_per_pixel = BIT_PER_PIXEL;
 	env->endian = ENDIAN;
-//	env->ect_pix = env->line;
 	env->ect_pix = ECT_PIX;
 	env->ecart_case = env->ect_pix * 4;
 	env->h_more = 0;

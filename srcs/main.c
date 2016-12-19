@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/16 18:59:50 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/19 02:08:30 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,11 @@ static void	ft_grillage_line(t_env *env)
 		while (++x < env->col - 1)
 		{
 			if (env->point[y][x].color)
-			{
-//				coleur = ft_cpy_mod(env->point[y][x].color);
 				coleur = env->point[y][x].color;
-			}
 			else
-			{
 				coleur = env->point[y][x + 1].color;
-//				coleur = ft_cpy_mod(env->point[y][x + 1].color);
-			}
 			ft_trait(env, ft_conv_point(env, x, y),
 					ft_conv_point(env, (x + 1), y), coleur);
-//			if (coleur)
-	//			free(coleur);
 		}
 	}
 }
@@ -82,19 +74,11 @@ static void	ft_grillage_col(t_env *env)
 		while (++x < env->col)
 		{
 			if (env->point[y][x].color)
-			{
 				coleur =env->point[y][x].color;
-//				coleur = ft_cpy_mod(env->point[y][x].color);
-			}
 			else
-			{
 				coleur = env->point[y + 1][x].color;
-//				coleur = ft_cpy_mod(env->point[y + 1][x].color);
-			}
 			ft_trait(env, ft_conv_point(env, x, y),
 					ft_conv_point(env, x, (y + 1)), coleur);
-//			if (coleur)
-//				free(coleur);
 		}
 	}
 }
@@ -110,6 +94,7 @@ int			main(int argc, char **argv)
 		ret = ft_read_file(argv[1], a);
 		if (ret == -1)
 			return (-1);
+		printf("\nTaille map : %d/%d\n", a->col, a->line);
 		if (!(a->mlx = mlx_init(0)) ||
 			(!(a->img = mlx_new_image(a->mlx, a->len_img.x, a->len_img.y))))
 			return (EXIT_FAILURE);
@@ -118,18 +103,11 @@ int			main(int argc, char **argv)
 			a->len_win.x, a->len_win.y, "FDF"))))
 			return (EXIT_FAILURE);
 		ft_grillage_line(a);
-		ft_putstr("je suis la ! 1\n");
 		ft_grillage_col(a);
-		ft_putstr("je suis la ! 2\n");
-
 		mlx_put_image_to_window(a->mlx, a->win, a->img, 50, 50);
-		ft_putstr("je suis la ! 3\n");
 		mlx_key_hook(a->win, my_key_funct, 0);
-		ft_putstr("je suis la ! 4\n");
 		ft_no_leaks(&a);
-		ft_putstr("je suis la ! 5\n");
 		mlx_loop(a->mlx);
-		ft_putstr("je suis la ! 6\n");
 	}
 	return (0);
 }
