@@ -6,36 +6,12 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:27:34 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/19 02:43:55 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/19 03:01:19 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 #include <stdio.h>
-
-char		*ft_cpy_mod(char *src)
-{
-	char	dst[9];
-	int	i;
-
-	i = 0;
-	dst[8] = '\0';
-	while (src && src[i] != '\0')
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	if (i > 0 && i < 8)
-	{
-		while (i < 8)
-		{
-			dst[i] = '0';
-			i++;
-		}
-		return (ft_strdup(dst));
-	}
-	return (NULL);
-}
 
 static void	ft_len_env(t_env *env)
 {

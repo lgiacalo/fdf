@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 03:07:04 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/19 02:53:27 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/19 03:01:57 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static t_point	*ft_space(char *str, t_env *env, int y)
 		new[len].x = len;
 		new[len].y = y;
 		if (ft_display_color(split[len]) == 0)
-			exit (0);
+			exit(0);
 		new[len].z = ft_atoi(split[len]);
 		new[len].color = NULL;
 	}

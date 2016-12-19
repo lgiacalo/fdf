@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/19 02:54:25 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/19 03:00:56 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	ft_grillage_col(t_env *env)
 		while (++x < env->col)
 		{
 			if (env->point[y][x].color)
-				coleur =env->point[y][x].color;
+				coleur = env->point[y][x].color;
 			else
 				coleur = env->point[y + 1][x].color;
 			ft_trait(env, ft_conv_point(env, x, y),

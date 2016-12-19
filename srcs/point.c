@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 00:03:24 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/19 02:32:24 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/19 03:03:04 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ t_point			ft_conv_point(t_env *env, int x, int y)
 {
 	t_point point;
 
-	point.x = x + ((x + 1) * env->ect_pix) + (env->iso * (env->line - y)) + (env->h_more);
+	point.x = x + ((x + 1) * env->ect_pix) + (env->iso * (env->line - y))
+		+ (env->h_more);
 	point.y = y + env->h_more + (env->ect_pix * y);
 	if (env->point[y][x].z != 0)
 	{
@@ -50,32 +51,9 @@ static int		ft_color(char one, char two)
 
 static void		ft_color_pixel(t_env *env, int ret, char *color)
 {
-	int i, k;
-
-	i = 2;
-	k = 2;
-	if (color)
-	{
-		while (color[i] != '\0')
-		{
-			env->str[ret + k] = ft_color(color[i + 1], color[i]);
-			i +=2;
-			k--;
-		}
-		if (k == 1)
-		{
-			env->str[ret] = 0;
-			env->str[ret + 1] = 0;
-		}
-		else
-			env->str[ret] = 0;
-	}
-	else
-	{
-		env->str[ret] = 255;
-		env->str[ret + 1] = 255;
-		env->str[ret + 2] = 255;
-	}
+	env->str[ret] = 255;
+	env->str[ret + 1] = 255;
+	env->str[ret + 2] = 255;
 }
 
 static int		ft_conv_ind(t_env *env, t_point a, char *color)
