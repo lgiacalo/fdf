@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:21:10 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/19 02:08:30 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/19 02:54:25 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ void		ft_no_leaks(t_env **a)
 	{
 		y = -1;
 		while (++y < (*a)->col)
+		{
 			if ((*a)->point[x][y].color)
 				free((*a)->point[x][y].color);
+		}
 		free((*a)->point[x]);
 	}
 	free((*a)->point);

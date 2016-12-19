@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 19:42:12 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/19 02:09:59 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/19 02:43:56 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 # define FDF_H
 
 # define BIT_PER_PIXEL 32
-# define ECT_PIX 1
 # define ENDIAN 1
-# define ISO (ECT_PIX / 3)
 # define MIN(x, y) ((x < y) ? (x) : (y))
 # define MAX(x, y) ((x < y) ? (y) : (x))
 
@@ -51,6 +49,7 @@ typedef struct	s_env
 	int			ect_pix;
 	int			ecart_case;
 	int			h_more;
+	int			iso;
 }				t_env;
 
 int				ft_read_file(char *tab, t_env *env);

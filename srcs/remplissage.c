@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:27:34 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/19 02:08:49 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/19 02:43:55 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,20 @@ void		ft_remplissage(t_env *env)
 {
 	env->bit_per_pixel = BIT_PER_PIXEL;
 	env->endian = ENDIAN;
-	env->ect_pix = ECT_PIX;
+	if (env->line < 100)
+		env->ect_pix = 21;
+	else if (env->line < 200)
+		env->ect_pix = 6;
+	else if (env->line < 300)
+		env->ect_pix = 3;
+	else
+		env->ect_pix = 1;
+	env->iso = (env->ect_pix / 3);
 	env->ecart_case = env->ect_pix * 4;
 	env->h_more = 0;
 	ft_len_env(env);
 	env->len_img.x = env->ect_pix + env->col + (env->col * env->ect_pix) +
-		(env->line * ISO) + (2 * env->h_more);
+		(env->line * env->iso) + (2 * env->h_more);
 	env->len_img.y = (2 * env->h_more) + env->line +
 		((env->line - 1) * env->ect_pix);
 	env->len_win.x = env->len_img.x + 100;

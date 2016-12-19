@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 00:03:24 by lgiacalo          #+#    #+#             */
-/*   Updated: 2016/12/19 02:09:17 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2016/12/19 02:32:24 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_point			ft_conv_point(t_env *env, int x, int y)
 {
 	t_point point;
 
-	point.x = x + ((x + 1) * env->ect_pix) + (ISO * (env->line - y)) + (env->h_more);
+	point.x = x + ((x + 1) * env->ect_pix) + (env->iso * (env->line - y)) + (env->h_more);
 	point.y = y + env->h_more + (env->ect_pix * y);
 	if (env->point[y][x].z != 0)
 	{
