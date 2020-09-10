@@ -45,7 +45,7 @@ OBJ_NAME	= $(SRC_NAME:.c=.o)
 SRC			= $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ			= $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
-LIB			= libft/libft.a minilibx_macos/libmlx.a -lmlx -L minilibx_macos/
+LIB			= libft/libft.a minilibx_macos/libmlx.a -L minilibx_macos/
 
 FRAME		= -framework OpenGL -framework AppKit
 
